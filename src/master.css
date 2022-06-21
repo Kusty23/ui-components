@@ -1,0 +1,217 @@
+/* Import icons from Google Fonts for now */
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0');
+
+:root{
+    --inputAccentColor: #df2b1b;
+    --inputBackgroundColor: #494859;
+    --lightTypeColor: #ffffff;
+    --darkTypeColor: #000000;
+    --BackgroundColor: #23232c;
+    --containerBackgroundColor: #a9a9a9;
+
+    --functionalRed: var(--inputAccentColor);
+    --functionalGreen: #287a1c;
+    --functionalYellow: #e4b91e;
+    --functionalBlue: #1b76df;
+}   
+
+.main {
+    display: block;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: var(--BackgroundColor);
+    color: var(--lightTypeColor);
+    padding: 0 15%;
+}
+
+.KCardContainer{
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -webkit-flex-flow: column wrap;
+        -ms-flex-flow: column wrap;
+            flex-flow: column wrap;
+    -webkit-align-content: space-between;
+        -ms-flex-line-pack: justify;
+            align-content: center;
+    max-height: 1200px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    font-size: 60px;
+    margin-bottom: 40px;
+}
+
+h2 {
+    font-size: 40px;
+    margin-bottom: 30px;
+}
+
+h3 {
+    font-size: 24px;
+    font-weight: normal;
+    text-transform: uppercase;
+}
+
+h4 {
+    font-size: 20px;
+    font-weight: normal;
+    font-style: italic;
+    text-transform: uppercase;
+}
+
+p {
+    font-size: 18px;
+}
+
+.KCaption {
+    font-size: 16px;
+}
+
+.KTinyText {
+    font-size: 12px;
+}
+
+.KLabel {
+    padding: 0 10px;
+}
+
+.KIcon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
+.KTopMenu {
+    background-color: var(--inputBackgroundColor);
+    width: 100%;
+    height: 70px;
+}
+
+.KInput, .KLightInput {
+    border-radius: 5px;
+    margin: 3px;
+    min-height: 30px;
+    accent-color: var(--inputAccentColor);
+    transition: filter .2s;
+}
+
+.KInput {
+    background-color: var(--inputBackgroundColor);
+    color: var(--lightTypeColor);
+    border: 1px solid var(--lightTypeColor);
+}
+
+.KLightInput {
+    color: var(--light);
+    border: 1px solid var(--darkTypeColor);
+    
+}
+
+.KInput:hover, .KRadio:focus-within {
+    filter: brightness(1.25);
+}
+
+.KLightInput:hover {
+    filter: brightness(.90);
+}
+
+.KContainer {
+    margin: 20px;
+    width: 100%;
+}
+
+.KSection, .KSubsection {
+    margin: 10px 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.KButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.KButton:active {
+    transform: scale(.9, .9);
+}
+
+.KSelect {
+    padding-right: 10px;
+}
+
+.KInputContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.KRadio {
+    transform: scale(1.5);
+    margin-right: 5px;
+}
+
+.KInputContainer label {
+    min-width: 100px;
+}
+
+.KCheckbox {
+    transform: scale(1.5);
+}
+
+.KCard {
+    border-radius: 10px;
+    background-color: var(--containerBackgroundColor);
+
+    padding: 15px;
+    max-width: 48%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.KColorSwatch {
+    height: 100px;
+    width: 100px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.KTable {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.KTable th, .KTable td {
+    border: 1px solid black;
+    padding: 5px 10px;
+}
+
+.KLoader {
+    fill: none;
+    stroke: var(--inputAccentColor);
+    stroke-width: 5px;
+    animation: loader-spin;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes loader-spin {
+    100% {transform: rotate(360deg);}
+}
