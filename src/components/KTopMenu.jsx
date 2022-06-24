@@ -7,7 +7,12 @@ export default function KTopMenu(props) {
     props.content.length > 0 &&
     props.content.map((item, i) => {
       return (
-        <KMenuLink text={item} selected={selected} setSelected={setSelected} />
+        <KMenuLink
+          href={item.href}
+          text={item.text}
+          selected={selected}
+          setSelected={setSelected}
+        />
       );
     }, this);
 

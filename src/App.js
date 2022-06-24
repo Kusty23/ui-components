@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 
 import KTopMenu from "./components/KTopMenu";
+import DesignGuidelines from "./pages/DesignGuidelines";
 import Home from "./pages/Home";
 
 const App = () => (
@@ -9,7 +10,7 @@ const App = () => (
     <KTopMenu
       logo="./logo.svg"
       index="0"
-      content={["link1", "link2", "link3"]}
+      content={[{ text: "Guideline", href: "./guideline" }]}
     />
     <Main />
   </div>
@@ -17,7 +18,8 @@ const App = () => (
 
 const Main = () => (
   <Routes>
-    <Route path="/test" element={<Home />}></Route>
+    <Route path="/" element={<Home />}></Route>
+    <Route path="/guideline" element={<DesignGuidelines />} />
   </Routes>
 );
 

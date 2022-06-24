@@ -8,6 +8,7 @@ export default class KMenuLink extends Component {
   render() {
     return (
       <a
+        href={this.props.href}
         onClick={() => this.props.setSelected(this.props.text)}
         className={
           this.props.selected === this.props.text
