@@ -6,6 +6,7 @@ import KTopMenu from "./components/KTopMenu";
 import Home from "./pages/Home";
 import DesignGuidelines from "./pages/DesignGuidelines";
 import NavMenus from "./pages/NavMenus";
+import Scrollbars from "./pages/Scrollbars";
 
 const App = () => (
   <div className="app">
@@ -26,6 +27,7 @@ const Main = () => (
     <Route path="/" element={<Home />}></Route>
     <Route path="/guideline" element={<DesignGuidelines />} />
     <Route path="/navmenus" element={<NavMenus />} />
+    <Route path="/scrollbars" element={<Scrollbars />} />
   </Routes>
 );
 
