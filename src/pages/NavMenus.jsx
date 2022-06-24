@@ -23,6 +23,8 @@ export default class NavMenus extends Component {
                       { text: "Link 2", href: "#Basic" },
                       {
                         isGroup: true,
+                        text: "Menu Group",
+                        href: "#Basic",
                         content: [
                           {
                             text: "Sublink 1",
@@ -50,6 +52,8 @@ export default class NavMenus extends Component {
                       { text: "Link 2", href: "#Highlight" },
                       {
                         isGroup: true,
+                        text: "Menu Group",
+                        href: "#Highlight",
                         content: [
                           {
                             text: "Sublink 1",
@@ -75,6 +79,21 @@ export default class NavMenus extends Component {
                     content={[
                       { text: "Link 1", href: "#Bubble" },
                       { text: "Link 2", href: "#Bubble" },
+                      {
+                        isGroup: true,
+                        text: "Menu Group",
+                        href: "#Bubble",
+                        content: [
+                          {
+                            text: "Sublink 1",
+                            href: "#Bubble",
+                          },
+                          {
+                            text: "Sublink 2",
+                            href: "#Bubble",
+                          },
+                        ],
+                      },
                     ]}
                   />
                 }
@@ -89,6 +108,21 @@ export default class NavMenus extends Component {
                     content={[
                       { text: "Link 1", href: "#Underline" },
                       { text: "Link 2", href: "#Underline" },
+                      {
+                        isGroup: true,
+                        text: "Menu Group",
+                        href: "#Underline",
+                        content: [
+                          {
+                            text: "Sublink 1",
+                            href: "#Underline",
+                          },
+                          {
+                            text: "Sublink 2",
+                            href: "#Underline",
+                          },
+                        ],
+                      },
                     ]}
                   />
                 }

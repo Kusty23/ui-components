@@ -8,19 +8,11 @@ export default function KTopMenu(props) {
     props.content.length > 0 &&
     props.content.map((item, i) => {
       if (item.isGroup) {
-        const subgroup = item.content.map((subitem, j) => {
-          return (
-            <KMenuLink
-              href={subitem.href}
-              text={subitem.text}
-              selected={selected}
-              setSelected={setSelected}
-            />
-          );
-        });
         return (
           <KMenuGroup
-            content={subgroup}
+            text={item.text}
+            href={item.href}
+            content={item.content}
             selected={selected}
             setSelected={setSelected}
           />

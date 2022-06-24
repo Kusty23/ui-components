@@ -3,16 +3,28 @@ import KMenuLink from "./KMenuLink";
 
 class KMenuGroup extends Component {
   render() {
+    const subgroup = this.props.content.map((subitem, j) => {
+      return (
+        <KMenuLink
+          href={subitem.href}
+          text={subitem.text}
+          selected={this.props.selected}
+          setSelected={this.props.setSelected}
+          selectedValue={this.props.text}
+        />
+      );
+    });
+
     return (
       <>
         <div className="KMenuGroup">
           <KMenuLink
-            href="#"
-            text="Group"
+            href={this.props.href}
+            text={this.props.text}
             selected={this.props.selected}
             setSelected={this.props.setSelected}
           ></KMenuLink>
-          <div>{this.props.content}</div>
+          <div>{subgroup}</div>
         </div>
       </>
     );
