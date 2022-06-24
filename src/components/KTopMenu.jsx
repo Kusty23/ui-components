@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import KMenuGroup from "./KMenuGroup";
 import KMenuLink from "./KMenuLink";
 
 export default function KTopMenu(props) {
@@ -6,18 +7,34 @@ export default function KTopMenu(props) {
   const links =
     props.content.length > 0 &&
     props.content.map((item, i) => {
-      return (
-        <KMenuLink
-          href={item.href}
-          text={item.text}
-          selected={selected}
-          setSelected={setSelected}
-        />
-      );
+      if (item.isGroup) {
+        const subgroup = item.content.map((subitem, j) => {
+          return (
+            <KMenuLink
+              href={subitem.href}
+              text={subitem.text}
+              selected={selected}
+              setSelected={setSelected}
+            />
+          );
+        });
+        return <KMenuGroup content={subgroup} />;
+      } else {
+        return (
+          <KMenuLink
+            href={item.href}
+            text={item.text}
+            selected={selected}
+            setSelected={setSelected}
+          />
+        );
+      }
     }, this);
 
+  let classStyle = "KTopMenu " + props.style;
+
   return (
-    <div className="KTopMenu">
+    <div className={classStyle}>
       <img src={props.logo}></img>
       <div>{links}</div>
     </div>
