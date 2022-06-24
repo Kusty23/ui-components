@@ -1,6 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import { BrowserRouter } from "react-router-dom";
 import "./index.css";
+import App from "./App";
 import KButton from "./components/KButton";
 import KSelect from "./components/KSelect";
 
@@ -15,7 +17,7 @@ import KLoader from "./components/KLoader";
 import KTopMenu from "./components/KTopMenu";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
+/*root.render(
   <div className="main">
     <h1>Web UI Components & Style Guide</h1>
 
@@ -267,4 +269,11 @@ root.render(
       }
     />
   </div>
+);
+*/
+
+root.render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
 );
