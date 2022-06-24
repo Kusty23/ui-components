@@ -6,7 +6,12 @@ class KMenuGroup extends Component {
     return (
       <>
         <div className="KMenuGroup">
-          <KMenuLink text="Group"></KMenuLink>
+          <KMenuLink
+            href="#"
+            text="Group"
+            selected={this.props.selected}
+            setSelected={this.props.setSelected}
+          ></KMenuLink>
           <div>{this.props.content}</div>
         </div>
       </>

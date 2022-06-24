@@ -48,6 +48,19 @@ export default class NavMenus extends Component {
                     content={[
                       { text: "Link 1", href: "#Highlight" },
                       { text: "Link 2", href: "#Highlight" },
+                      {
+                        isGroup: true,
+                        content: [
+                          {
+                            text: "Sublink 1",
+                            href: "#Highlight",
+                          },
+                          {
+                            text: "Sublink 2",
+                            href: "#Highlight",
+                          },
+                        ],
+                      },
                     ]}
                   />
                 }

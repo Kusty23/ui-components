@@ -18,7 +18,13 @@ export default function KTopMenu(props) {
             />
           );
         });
-        return <KMenuGroup content={subgroup} />;
+        return (
+          <KMenuGroup
+            content={subgroup}
+            selected={selected}
+            setSelected={setSelected}
+          />
+        );
       } else {
         return (
           <KMenuLink
