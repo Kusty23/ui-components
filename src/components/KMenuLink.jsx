@@ -10,8 +10,6 @@ export default class KMenuLink extends Component {
       ? this.props.selectedValue
       : this.props.text;
 
-    console.log(this.props.selectedValue);
-
     return (
       <a
         href={this.props.href}

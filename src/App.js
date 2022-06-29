@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import DesignGuidelines from "./pages/DesignGuidelines";
 import NavMenus from "./pages/NavMenus";
 import Scrollbars from "./pages/Scrollbars";
+import Carousels from "./pages/Carousels";
 
 const App = () => (
   <div className="app">
@@ -15,7 +16,15 @@ const App = () => (
       index="0"
       content={[
         { text: "Guideline", href: "./guideline" },
-        { text: "Nav Menus", href: "./navmenus" },
+        {
+          isGroup: true,
+          text: "UI Components",
+          content: [
+            { text: "Nav Menus", href: "./navmenus" },
+            { text: "Scrollbars", href: "./scrollbars" },
+            { text: "Carousels", href: "./carousels" },
+          ],
+        },
       ]}
     />
     <Main />
@@ -28,6 +37,7 @@ const Main = () => (
     <Route path="/guideline" element={<DesignGuidelines />} />
     <Route path="/navmenus" element={<NavMenus />} />
     <Route path="/scrollbars" element={<Scrollbars />} />
+    <Route path="/carousels" element={<Carousels />} />
   </Routes>
 );
 
