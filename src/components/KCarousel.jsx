@@ -13,6 +13,7 @@ export default function KCarousel(props) {
     props.content.map((item, i) => {
       return (
         <KSlide
+          key={i}
           index={i}
           style={props.style}
           background={item.background}

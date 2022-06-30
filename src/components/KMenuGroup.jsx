@@ -3,9 +3,10 @@ import KMenuLink from "./KMenuLink";
 
 class KMenuGroup extends Component {
   render() {
-    const subgroup = this.props.content.map((subitem, j) => {
+    const subgroup = this.props.content.map((subitem, i) => {
       return (
         <KMenuLink
+          key={i + subitem}
           href={subitem.href}
           text={subitem.text}
           selected={this.props.selected}

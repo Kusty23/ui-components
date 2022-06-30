@@ -10,6 +10,7 @@ export default function KTopMenu(props) {
       if (item.isGroup) {
         return (
           <KMenuGroup
+            key={i + item}
             text={item.text}
             href={item.href}
             content={item.content}
@@ -20,6 +21,7 @@ export default function KTopMenu(props) {
       } else {
         return (
           <KMenuLink
+            key={i + item}
             href={item.href}
             text={item.text}
             selected={selected}
