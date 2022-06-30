@@ -1,0 +1,60 @@
+.KInput, .KLightInput {
+    border-radius: 5px;
+    margin: 3px;
+    min-height: 30px;
+    accent-color: var(--inputAccentColor);
+    transition: filter .2s;
+}
+
+.KInput {
+    background-color: var(--inputBackgroundColor);
+    color: var(--lightTypeColor);
+    border: 1px solid var(--lightTypeColor);
+}
+
+.KLightInput {
+    color: var(--light);
+    border: 1px solid var(--darkTypeColor);
+    
+}
+
+.KInput:hover, .KRadio:focus-within {
+    filter: brightness(1.25);
+}
+
+.KLightInput:hover {
+    filter: brightness(.90);
+}
+
+.KSelect {
+    padding-right: 10px;
+}
+
+.KInputContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.KRadio {
+    transform: scale(1.5);
+    margin-right: 5px;
+}
+
+.KInputContainer label {
+    min-width: 100px;
+}
+
+.KCheckbox {
+    transform: scale(1.5);
+}
+
+.KButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.KButton:active {
+    transform: scale(.9, .9);
+}

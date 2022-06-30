@@ -1,0 +1,13 @@
+:root{
+    --inputAccentColor: #df2b1b;
+    --inputBackgroundColor: #494859;
+    --lightTypeColor: #ffffff;
+    --darkTypeColor: #000000;
+    --BackgroundColor: #23232c;
+    --containerBackgroundColor: #a9a9a9;
+
+    --functionalRed: var(--inputAccentColor);
+    --functionalGreen: #287a1c;
+    --functionalYellow: #e4b91e;
+    --functionalBlue: #1b76df;
+}  

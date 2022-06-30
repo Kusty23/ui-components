@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 
 import KCarousel from "../components/KCarousel";
-import KSlide from "../components/KSlide";
 import KSection from "../components/KSection";
 import KSubsection from "../components/KSubsection";
 

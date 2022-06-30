@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import "../master.css";
 import KIcon from "./KIcon";
 import KLabel from "./KLabel";
 

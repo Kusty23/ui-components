@@ -1,0 +1,80 @@
+.KContainer {
+    margin: 20px;
+    width: 100%;
+}
+
+.KSection, .KSubsection {
+    margin: 10px 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.KCard {
+    border-radius: 10px;
+    background-color: var(--containerBackgroundColor);
+
+    padding: 15px;
+    max-width: 48%;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.KTable {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.KTable th, .KTable td {
+    border: 1px solid black;
+    padding: 5px 10px;
+}
+
+.KScrollable {
+    overflow-y: scroll;
+}
+
+.KScrollable::-webkit-scrollbar {
+    width: 30px;
+}
+ 
+.KScrollable::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius: 999px;
+    border: 10px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+}
+ 
+.KScrollable::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+    -webkit-box-shadow: inset 0 0 10px rgba(0,0,0,0.5); 
+    border: 10px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+}
+
+.KScrollable.notrack::-webkit-scrollbar-track {
+    display: none;
+}
+
+.KScrollable.nobar::-webkit-scrollbar {
+    display: none;
+}
+
+.KCardContainer{
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -webkit-flex-flow: column wrap;
+        -ms-flex-flow: column wrap;
+            flex-flow: column wrap;
+    -webkit-align-content: space-between;
+        -ms-flex-line-pack: justify;
+            align-content: center;
+    max-height: 1200px;
+}

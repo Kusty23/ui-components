@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+//import "../src/components/KCaorusel.css";
 
 import KSlide from "./KSlide";
 import KIcon from "./KIcon";

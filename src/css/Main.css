@@ -1,0 +1,64 @@
+/* Import icons from Google Fonts for now */
+@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@48,400,0,0');
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }  
+
+.app {
+    display: flex;
+    flex-direction: column;
+}
+
+.main {
+    display: block;
+    min-height: 100vh;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: var(--BackgroundColor);
+    color: var(--lightTypeColor);
+    padding: 0 15%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.KIcon {
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
+.KColorSwatch {
+    height: 100px;
+    width: 100px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+.KLoader {
+    fill: none;
+    stroke: var(--inputAccentColor);
+    stroke-width: 5px;
+    animation: loader-spin;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes loader-spin {
+    100% {transform: rotate(360deg);}
+}
+
