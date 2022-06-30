@@ -2,19 +2,19 @@
     border-radius: 5px;
     margin: 3px;
     min-height: 30px;
-    accent-color: var(--inputAccentColor);
+    accent-color: var(--accentColor);
     transition: filter .2s;
 }
 
 .KInput {
     background-color: var(--inputBackgroundColor);
-    color: var(--lightTypeColor);
-    border: 1px solid var(--lightTypeColor);
+    color: var(--mainTypeColor);
+    border: 1px solid var(--mainTypeColor);
 }
 
 .KLightInput {
     color: var(--light);
-    border: 1px solid var(--darkTypeColor);
+    border: 1px solid var(--mainTypeColor);
     
 }
 

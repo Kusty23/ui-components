@@ -1,0 +1,26 @@
+.KSite {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.blob {
+    width: 100%;
+    height: 100%;
+}
+
+.blob svg  {
+    top:0;
+    width: 250px;
+    position: absolute;
+    fill: rgb(75, 27, 65);
+}
+
+.blob svg path.st1 {
+    top:20px;
+    left: 20px;
+    width: 250px;
+    position: absolute;
+    stroke: rgb(0, 0, 0);
+    fill: none;
+}

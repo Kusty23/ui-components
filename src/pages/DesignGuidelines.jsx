@@ -40,20 +40,20 @@ export default class DesignGuidelines extends Component {
                 content={
                   <>
                     <KColorSwatch
-                      text="--inputAccentColor"
-                      color="var(--inputAccentColor)"
+                      text="--accentColor"
+                      color="var(--accentColor)"
                     />
                     <KColorSwatch
                       text="--inputBackgroundColor"
                       color="var(--inputBackgroundColor)"
                     />
                     <KColorSwatch
-                      text="--lightTypeColor"
-                      color="var(--lightTypeColor)"
+                      text="--mainTypeColor"
+                      color="var(--mainTypeColor)"
                     />
                     <KColorSwatch
-                      text="--darkTypeColor"
-                      color="var(--darkTypeColor)"
+                      text="--alternateTypeColor"
+                      color="var(--alternateTypeColor)"
                     />
                     <KColorSwatch
                       text="--BackgroundColor"

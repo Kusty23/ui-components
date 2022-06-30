@@ -1,12 +1,12 @@
 :root{
-    --inputAccentColor: #df2b1b;
-    --inputBackgroundColor: #494859;
-    --lightTypeColor: #ffffff;
-    --darkTypeColor: #000000;
-    --BackgroundColor: #23232c;
+    --accentColor: #be1000;
+    --inputBackgroundColor: #be1000;
+    --mainTypeColor: #1a100b;
+    --alternateTypeColor: #ffffff;
+    --BackgroundColor: #dacdbc;
     --containerBackgroundColor: #a9a9a9;
 
-    --functionalRed: var(--inputAccentColor);
+    --functionalRed: var(--accentColor);
     --functionalGreen: #287a1c;
     --functionalYellow: #e4b91e;
     --functionalBlue: #1b76df;

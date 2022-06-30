@@ -10,6 +10,7 @@ import DesignGuidelines from "./pages/DesignGuidelines";
 import NavMenus from "./pages/NavMenus";
 import Scrollbars from "./pages/Scrollbars";
 import Carousels from "./pages/Carousels";
+import Blobs from "./pages/Blobs.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -30,6 +31,7 @@ root.render(
               { text: "Carousels", href: "./carousels" },
             ],
           },
+          { text: "Blobs", href: "./blobs" },
         ]}
       />
       <Routes>
@@ -38,6 +40,7 @@ root.render(
         <Route path="/navmenus" element={<NavMenus />} />
         <Route path="/scrollbars" element={<Scrollbars />} />
         <Route path="/carousels" element={<Carousels />} />
+        <Route path="/blobs" element={<Blobs />} />
       </Routes>
     </div>
   </BrowserRouter>

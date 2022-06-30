@@ -10,6 +10,10 @@ body {
     -moz-osx-font-smoothing: grayscale;
   }  
 
+  body::-webkit-scrollbar {
+    display: none;
+}
+
 .app {
     display: flex;
     flex-direction: column;
@@ -23,7 +27,7 @@ body {
     justify-content: center;
     flex-wrap: wrap;
     background-color: var(--BackgroundColor);
-    color: var(--lightTypeColor);
+    color: var(--mainTypeColor);
     padding: 0 15%;
 }
 
@@ -51,7 +55,7 @@ body {
 
 .KLoader {
     fill: none;
-    stroke: var(--inputAccentColor);
+    stroke: var(--accentColor);
     stroke-width: 5px;
     animation: loader-spin;
     animation-duration: 2s;
@@ -61,4 +65,3 @@ body {
 @keyframes loader-spin {
     100% {transform: rotate(360deg);}
 }
-

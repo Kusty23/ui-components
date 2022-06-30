@@ -35,7 +35,10 @@ export default function KTopMenu(props) {
 
   return (
     <div className={classStyle}>
-      <img src={props.logo}></img>
+      <a href="./">
+        <img src={props.logo}></img>
+      </a>
+
       <div>{links}</div>
     </div>
   );
