@@ -4,7 +4,7 @@ import KLabel from "./KLabel";
 
 class KButton extends Component {
   render() {
-    let { color = "" } = this.props;
+    let { color = "--accentColor" } = this.props;
 
     let icon;
     if (this.props.icon) {

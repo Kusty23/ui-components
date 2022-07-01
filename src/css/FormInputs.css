@@ -8,7 +8,7 @@
 
 .KInput {
     background-color: var(--inputBackgroundColor);
-    color: var(--mainTypeColor);
+    color: var(--alternateTypeColor);
     border: 1px solid var(--mainTypeColor);
 }
 
@@ -20,10 +20,6 @@
 
 .KInput:hover, .KRadio:focus-within {
     filter: brightness(1.25);
-}
-
-.KLightInput:hover {
-    filter: brightness(.90);
 }
 
 .KSelect {
@@ -53,6 +49,15 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 48px;
+    padding: 0 8px;
+    border-radius: 25px;
+    border: none;
+    min-width: 48px;
+}
+
+.KButton:hover {
+    box-shadow: 5px 5px 22px -4px rgba(0, 0, 0, 0.7);
 }
 
 .KButton:active {

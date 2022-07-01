@@ -11,6 +11,7 @@ import NavMenus from "./pages/NavMenus";
 import Scrollbars from "./pages/Scrollbars";
 import Carousels from "./pages/Carousels";
 import Blobs from "./pages/Blobs.jsx";
+import Buttons from "./pages/Buttons.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -29,6 +30,7 @@ root.render(
               { text: "Nav Menus", href: "./navmenus" },
               { text: "Scrollbars", href: "./scrollbars" },
               { text: "Carousels", href: "./carousels" },
+              { text: "Buttons", href: "./buttons" },
             ],
           },
           { text: "Blobs", href: "./blobs" },
@@ -40,6 +42,7 @@ root.render(
         <Route path="/navmenus" element={<NavMenus />} />
         <Route path="/scrollbars" element={<Scrollbars />} />
         <Route path="/carousels" element={<Carousels />} />
+        <Route path="/buttons" element={<Buttons />} />
         <Route path="/blobs" element={<Blobs />} />
       </Routes>
     </div>
