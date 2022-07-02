@@ -28,7 +28,7 @@ export default class Scrollbars extends Component {
                       }}
                       className="KScrollable"
                     >
-                      {filler}
+                      <p>{filler}</p>
                     </div>
                   </>
                 }
@@ -46,7 +46,7 @@ export default class Scrollbars extends Component {
                       }}
                       className="KScrollable notrack"
                     >
-                      {filler}
+                      <p>{filler}</p>
                     </div>
                   </>
                 }
@@ -64,7 +64,7 @@ export default class Scrollbars extends Component {
                       }}
                       className="KScrollable nobar"
                     >
-                      {filler}
+                      <p>{filler}</p>
                     </div>
                   </>
                 }
