@@ -106,12 +106,14 @@ export default class DesignGuidelines extends Component {
           content={
             <>
               <div>
-                <h1>Banner Text</h1>
-                <h2>Main Title</h2>
-                <h3>Heading</h3>
-                <h4>Subheading</h4>
-                <p className="KCaption">Caption</p>
+                <h1 className="KHeroText">Hero Text</h1>
+                <h1>Heading 1</h1>
+                <h2>Heading 2</h2>
+                <h3>Heading 3</h3>
+                <h4>Heading 4</h4>
                 <p>Paragraphs can have emphasized text</p>
+                <p className="KCaption">Caption</p>
+                <p className="KTinyText">Tiny Text</p>
               </div>
             </>
           }

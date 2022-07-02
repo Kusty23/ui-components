@@ -3,11 +3,14 @@
     --inputBackgroundColor: #be1000;
     --mainTypeColor: #1a100b;
     --alternateTypeColor: #ffffff;
-    --BackgroundColor: #dacdbc;
+    --BackgroundColor: #efe4d5;
     --containerBackgroundColor: #a9a9a9;
 
     --functionalRed: var(--accentColor);
     --functionalGreen: #287a1c;
     --functionalYellow: #e4b91e;
     --functionalBlue: #1b76df;
+
+    --serif: 'Gentium Book Plus', serif;
+    --sans-serif: 'Kanit', sans-serif;
 }  
