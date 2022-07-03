@@ -6,9 +6,11 @@ export default class KSubsection extends Component {
       return (
         <>
           <a id={this.props.title}></a>
-          <div className="KContainer">
-            <h3>{this.props.title}</h3>
-            <section className="KSubsection">{this.props.content}</section>
+          <div className="KContainer span--12 KGrid">
+            <h3 className="span--12">{this.props.title}</h3>
+            <section className="KSubsection span--12 KGrid">
+              {this.props.content}
+            </section>
           </div>
         </>
       );

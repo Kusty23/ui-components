@@ -4,7 +4,7 @@ export default class KColorSwatch extends Component {
   render() {
     const color = this.props.color;
     return (
-      <div className="">
+      <div className="span--3">
         <div
           style={{
             backgroundColor: color,

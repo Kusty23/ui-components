@@ -15,19 +15,8 @@ import KTopMenu from "../components/KTopMenu";
 export default class DesignGuidelines extends Component {
   render() {
     return (
-      <div className="main">
-        <h1>Web UI Components & Style Guide</h1>
-
-        <KSection
-          title="Top Nav Menus"
-          content={
-            <KTopMenu
-              logo="./logo.svg"
-              index="0"
-              content={["link1", "link2", "link3"]}
-            />
-          }
-        />
+      <div className="main KGrid">
+        <h1 className="span--12">Web UI Components & Style Guide</h1>
 
         <KSection title="Loaders" content={<KLoader />} />
 
@@ -102,6 +91,17 @@ export default class DesignGuidelines extends Component {
         />
 
         <KSection
+          title="Top Nav Menus"
+          content={
+            <KTopMenu
+              logo="./logo.svg"
+              index="0"
+              content={["link1", "link2", "link3"]}
+            />
+          }
+        />
+
+        <KSection
           title="Type"
           content={
             <>
@@ -155,6 +155,7 @@ export default class DesignGuidelines extends Component {
                 title="Buttons"
                 content={
                   <KTable
+                    classStyle="span--12"
                     title="Table"
                     headers={[
                       "Icon Only",

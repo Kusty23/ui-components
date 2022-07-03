@@ -10,6 +10,7 @@
     background-color: var(--inputBackgroundColor);
     color: var(--alternateTypeColor);
     border: 1px solid var(--mainTypeColor);
+    grid-column: span 4;
 }
 
 .KLightInput {
@@ -54,6 +55,7 @@
     border: none;
     width:100%;
     transition: .2s;
+    grid-column: span 2;
 }
 
 .KButton.KLightInput {

@@ -26,7 +26,7 @@ export default class Scrollbars extends Component {
                         backgroundColor: "white",
                         color: "black",
                       }}
-                      className="KScrollable"
+                      className="KScrollable span--12"
                     >
                       <p>{filler}</p>
                     </div>
@@ -44,7 +44,7 @@ export default class Scrollbars extends Component {
                         backgroundColor: "white",
                         color: "black",
                       }}
-                      className="KScrollable notrack"
+                      className="KScrollable notrack span--12"
                     >
                       <p>{filler}</p>
                     </div>
@@ -62,7 +62,7 @@ export default class Scrollbars extends Component {
                         backgroundColor: "white",
                         color: "black",
                       }}
-                      className="KScrollable nobar"
+                      className="KScrollable nobar span--12"
                     >
                       <p>{filler}</p>
                     </div>

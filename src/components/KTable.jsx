@@ -29,8 +29,11 @@ export default class KTable extends Component {
         );
       }, this);
 
+    let classStyle =
+      "KContainer KScrollable horizontal " + this.props.classStyle;
+
     return (
-      <div className="KContainer KScrollable horizontal">
+      <div className={classStyle}>
         <table className="KTable">
           <thead>
             <tr className="KHeading">{head}</tr>

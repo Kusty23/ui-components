@@ -19,6 +19,7 @@ export default class Buttons extends Component {
                   <>
                     {" "}
                     <KTable
+                      classStyle="span--12"
                       title="Table"
                       headers={[
                         "",

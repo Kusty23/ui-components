@@ -14,7 +14,7 @@ export default class Grid extends Component {
               <KSubsection
                 title="Basic"
                 content={
-                  <div className="KGrid demo-only">
+                  <div className="KGrid span--12 demo-only">
                     <p className="span--1"></p>
                     <p className="span--1"></p>
                     <p className="span--1"></p>

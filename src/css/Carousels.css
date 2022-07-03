@@ -1,5 +1,5 @@
 .KCarousel {
-    width: 100%;
+    grid-column: span 12;
     height: 300px;
     position: relative;
 }

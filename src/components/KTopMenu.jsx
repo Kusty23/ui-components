@@ -31,7 +31,7 @@ export default function KTopMenu(props) {
       }
     }, this);
 
-  let classStyle = "KTopMenu " + props.style;
+  let classStyle = "KTopMenu span--12 " + props.style;
 
   return (
     <div className={classStyle}>
