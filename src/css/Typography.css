@@ -11,10 +11,10 @@ h1 {
     line-height: 6rem;
 }
 
-h2 {
+h2, .KAccordion summary {
     font-size: 4rem;
     line-height: 4rem;
-
+    font-weight: 500;
     color: var(--accentColor);
 }
 

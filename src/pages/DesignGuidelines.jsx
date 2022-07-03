@@ -12,6 +12,7 @@ import KIcon from "../components/KIcon";
 import KLoader from "../components/KLoader";
 import KTopMenu from "../components/KTopMenu";
 import KCodeBlock from "../components/KCodeBlock";
+import KAccordion from "../components/KAccordion";
 
 export default class DesignGuidelines extends Component {
   render() {
@@ -19,12 +20,12 @@ export default class DesignGuidelines extends Component {
       <div className="main KGrid">
         <h1 className="span--12">Web UI Components & Style Guide</h1>
 
-        <KSection title="Loaders" content={<KLoader />} />
+        <KAccordion title="Loaders" content={<KLoader />} />
 
-        <KSection
+        <KAccordion
           title="Colors"
           content={
-            <div className="KContainer">
+            <>
               <KSubsection
                 title="Primary"
                 content={
@@ -87,11 +88,11 @@ export default class DesignGuidelines extends Component {
                   </>
                 }
               />
-            </div>
+            </>
           }
         />
 
-        <KSection
+        <KAccordion
           title="Top Nav Menus"
           content={
             <>
@@ -114,25 +115,23 @@ export default class DesignGuidelines extends Component {
           }
         />
 
-        <KSection
+        <KAccordion
           title="Type"
           content={
             <>
-              <div>
-                <h1 className="KHeroText">Hero Text</h1>
-                <h1>Heading 1</h1>
-                <h2>Heading 2</h2>
-                <h3>Heading 3</h3>
-                <h4>Heading 4</h4>
-                <p>Paragraphs can have emphasized text</p>
-                <p className="KCaption">Caption</p>
-                <p className="KTinyText">Tiny Text</p>
-              </div>
+              <h1 className="KHeroText span--12">Hero Text</h1>
+              <h1 className="span--12">Heading 1</h1>
+              <h2 className="span--12">Heading 2</h2>
+              <h3 className="span--12">Heading 3</h3>
+              <h4 className="span--12">Heading 4</h4>
+              <p className="span--12">Paragraphs can have emphasized text</p>
+              <p className="KCaption span--12">Caption</p>
+              <p className="KTinyText span--12">Tiny Text</p>
             </>
           }
         />
 
-        <KSection
+        <KAccordion
           title="Icons"
           content={
             <>
@@ -159,7 +158,7 @@ export default class DesignGuidelines extends Component {
           }
         />
 
-        <KSection
+        <KAccordion
           title="Input Controls"
           content={
             <>

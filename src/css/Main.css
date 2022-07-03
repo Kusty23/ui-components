@@ -75,7 +75,6 @@ body {
 }
 
 .KCodeBlock {
-    width: 100%;
     font-size: 1.5rem;
     background: var(--containerBackgroundColor);
     border-radius: 10px;
