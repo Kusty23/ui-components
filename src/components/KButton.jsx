@@ -19,26 +19,30 @@ class KButton extends Component {
     if (this.props.light) {
       return (
         <button
-          className="KLightInput KButton"
+          className={"KLightInput KButton " + this.props.classStyle}
           style={{
             borderColor: "var(" + color + ")",
             color: "var(" + color + ")",
           }}
         >
-          {icon}
-          {label}
+          <span>
+            {icon}
+            {label}
+          </span>
         </button>
       );
     } else {
       return (
         <button
-          className="KInput KButton"
+          className={"KInput KButton " + this.props.classStyle}
           style={{
             backgroundColor: "var(" + color + ")",
           }}
         >
-          {icon}
-          {label}
+          <span>
+            {icon}
+            {label}
+          </span>
         </button>
       );
     }

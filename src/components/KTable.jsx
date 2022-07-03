@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import KLabel from "./KLabel";
+
 export default class KTable extends Component {
   render() {
     let datarows =
@@ -20,11 +22,15 @@ export default class KTable extends Component {
     let head =
       this.props.headers.length > 0 &&
       this.props.headers.map((item, i) => {
-        return <th>{item}</th>;
+        return (
+          <th>
+            <KLabel text={item} />
+          </th>
+        );
       }, this);
 
     return (
-      <div className="KContainer">
+      <div className="KContainer KScrollable horizontal">
         <table className="KTable">
           <thead>
             <tr className="KHeading">{head}</tr>

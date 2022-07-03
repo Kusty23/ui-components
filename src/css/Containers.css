@@ -37,6 +37,11 @@
     overflow-y: scroll;
 }
 
+.KScrollable.horizontal {
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
 .KScrollable::-webkit-scrollbar {
     width: 30px;
 }

@@ -50,10 +50,22 @@
     justify-content: center;
     align-items: center;
     height: 48px;
-    padding: 0 8px;
     border-radius: 25px;
     border: none;
-    min-width: 48px;
+    width:100%;
+    transition: .2s;
+}
+
+.KButton.KLightInput {
+    border: 2px solid;
+}
+
+.KButton>span {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 25px;
+    border-radius: 25px;
 }
 
 .KButton:hover {
@@ -62,4 +74,27 @@
 
 .KButton:active {
     transform: scale(.9, .9);
+}
+
+.KButton.three-d {
+    position:relative;
+}
+
+.KButton:hover {
+    filter: brightness(100%);
+}
+
+.KButton.three-d span {
+    background-color: var(--accentColor);
+    margin-top: -20px;
+    filter: brightness(135%);
+    transition: .2s;
+}
+
+.KButton.three-d:active {
+    transform: scale(1);
+}
+
+.KButton.three-d:active span {
+    margin-top: -5px;
 }

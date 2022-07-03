@@ -110,6 +110,16 @@ export default class Buttons extends Component {
                   </>
                 }
               />
+
+              <KSubsection
+                title="3D"
+                classStyle="3d"
+                content={
+                  <>
+                    <KButton classStyle="three-d" label="Press Me" />
+                  </>
+                }
+              />
             </>
           }
         />
