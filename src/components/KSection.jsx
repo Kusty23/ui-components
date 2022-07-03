@@ -4,7 +4,7 @@ export default class KSection extends Component {
   render() {
     if (this.props.title) {
       return (
-        <div className="KContainer">
+        <div className="KContainer span--12">
           <h2>{this.props.title}</h2>
           <section className="KSection">{this.props.content}</section>
         </div>

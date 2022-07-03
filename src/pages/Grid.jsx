@@ -6,7 +6,7 @@ import KSubsection from "../components/KSubsection";
 export default class Grid extends Component {
   render() {
     return (
-      <div className="main">
+      <div className="main KGrid">
         <KSection
           title="Grid System"
           content={
