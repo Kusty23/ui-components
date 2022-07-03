@@ -10,7 +10,11 @@ export default class KSection extends Component {
         </div>
       );
     } else {
-      return <section className="KSection">{this.props.content}</section>;
+      return (
+        <section className="KSection KGrid span--12">
+          {this.props.content}
+        </section>
+      );
     }
   }
 }

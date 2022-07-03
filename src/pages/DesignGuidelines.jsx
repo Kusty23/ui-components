@@ -11,6 +11,7 @@ import KTable from "../components/KTable";
 import KIcon from "../components/KIcon";
 import KLoader from "../components/KLoader";
 import KTopMenu from "../components/KTopMenu";
+import KCodeBlock from "../components/KCodeBlock";
 
 export default class DesignGuidelines extends Component {
   render() {
@@ -93,11 +94,23 @@ export default class DesignGuidelines extends Component {
         <KSection
           title="Top Nav Menus"
           content={
-            <KTopMenu
-              logo="./logo.svg"
-              index="0"
-              content={["link1", "link2", "link3"]}
-            />
+            <>
+              <KTopMenu
+                logo="./logo.svg"
+                index="0"
+                content={["link1", "link2", "link3"]}
+              />
+              <KCodeBlock
+                classStyle="span--12"
+                content={
+                  "<KTopMenu\n" +
+                  '    logo="./logo.svg"\n' +
+                  '    index="0"\n' +
+                  '    content={["link1", "link2", "link3"]}\n' +
+                  "/>"
+                }
+              />
+            </>
           }
         />
 
