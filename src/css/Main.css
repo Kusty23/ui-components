@@ -62,3 +62,14 @@ body {
 @keyframes loader-spin {
     100% {transform: rotate(360deg);}
 }
+
+.KGrid.demo-only {
+    width: 100%;
+    background-color: var(--accentColor);
+    padding: 20px;
+}
+
+.KGrid.KGrid.demo-only p {
+    background-color: white;
+    height: 48px;
+}
