@@ -1,3 +1,4 @@
+import { toHaveAccessibleDescription } from "@testing-library/jest-dom/dist/matchers";
 import React from "react";
 
 export default function KCanvas(props) {
@@ -12,6 +13,9 @@ export default function KCanvas(props) {
   const gridHeight = 10;
   const gridWidth = 10;
 
+  let mouse = { x: -1, y: -1 };
+  let dragging = false;
+
   const keyColors = {
     topLeft: { r: 255, g: 0, b: 140 },
     botLeft: { r: 255, g: 190, b: 100 },
@@ -19,21 +23,14 @@ export default function KCanvas(props) {
     botRight: { r: 60, g: 255, b: 145 },
   };
 
-  let gradient = Array(5);
-
   const packRGB = (r, g, b) => {
     return "rgb(" + r + "," + g + "," + b + ")";
-  };
-
-  const getColorByPos = (index) => {
-    let tl = gradient[index.y][index.x];
-    return packRGB(tl, 0, 0);
   };
 
   const rect = (x, y, color) => {
     ctx.fillStyle = color;
     ctx.beginPath();
-    ctx.fillRect(x + 100, y + 20, tileWidth, tileHeight);
+    ctx.fillRect(x, y, tileWidth, tileHeight);
     ctx.fill();
     ctx.closePath();
   };
@@ -109,30 +106,77 @@ export default function KCanvas(props) {
   };
 
   const draw = () => {
+    ctx.clearRect(0, 0, 300, 300);
     tiles.forEach((tile) => {
       tile.render(ctx);
     });
+    window.requestAnimationFrame(draw);
   };
 
   React.useEffect(() => {
     canvas = canvasRef.current;
     ctx = canvas.getContext("2d");
 
+    allowDrag(canvas);
+
     genTiles();
     genGradient();
-    draw();
+
+    window.requestAnimationFrame(draw);
   }, [draw]);
+
+  const indexFromPos = (mouse) => {
+    let index = {};
+    index.x = Math.floor(mouse.x / tileWidth);
+    index.y = Math.floor(mouse.y / tileHeight);
+    index.index = index.y * gridWidth + index.x;
+
+    return index;
+  };
+
+  const allowDrag = (canvas) => {
+    mouse = { x: -1, y: -1 };
+    dragging = false;
+
+    const mousedown = (e) => {
+      mouse.x = e.offsetX;
+      mouse.y = e.offsetY;
+
+      let selected = tiles[indexFromPos(mouse).index];
+      selected.color = { r: 255, g: 255, b: 255 };
+
+      dragging = false;
+      window.addEventListener("mousemove", (e) => mousemove(e), false);
+      window.addEventListener("mouseup", (e) => mouseup(e), false);
+    };
+
+    const mousemove = (e) => {
+      var dx = e.offsetX - mouse.x;
+      var dy = e.offsetY - mouse.y;
+
+      mouse.x = e.offsetX;
+      mouse.y = e.offsetY;
+    };
+
+    const mouseup = (e) => {
+      window.removeEventListener("mousemove", mousemove, false);
+      window.removeEventListener("mouseup", mouseup, false);
+    };
+
+    canvas.addEventListener("mousedown", (e) => mousedown(e), false);
+  };
 
   class Tile {
     constructor(x, y) {
       this.index = { x: x, y: y };
       this.color = { r: 0, g: 0, b: 0 };
+      this.pos = { x: x * tileWidth, y: y * tileHeight };
     }
 
     render() {
       rect(
-        this.index.x * tileWidth,
-        this.index.y * tileHeight,
+        this.pos.x,
+        this.pos.y,
         packRGB(this.color.r, this.color.g, this.color.b)
       );
     }
