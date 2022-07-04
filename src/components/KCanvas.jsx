@@ -7,11 +7,11 @@ export default function KCanvas(props) {
   let canvas;
   let ctx;
   let tiles = [];
-  const tileHeight = 40;
-  const tileWidth = 40;
+  const tileHeight = 70;
+  const tileWidth = 70;
 
-  const gridHeight = 10;
-  const gridWidth = 10;
+  const gridHeight = 5;
+  const gridWidth = 5;
 
   let mouse = { x: -1, y: -1 };
   let dragging = false;
@@ -24,13 +24,21 @@ export default function KCanvas(props) {
     botRight: { r: 60, g: 255, b: 145 },
   };
 
+  const locked = [
+    0,
+    gridWidth - 1,
+    gridHeight * gridWidth - gridWidth,
+    gridHeight * gridWidth - 1,
+  ];
+
   const packRGB = (r, g, b) => {
     return "rgb(" + r + "," + g + "," + b + ")";
   };
 
   const genTiles = () => {
     for (let i = 0; i < gridWidth * gridHeight; i++) {
-      tiles.push(new Tile(i));
+      let tile = !locked.includes(i) ? new Tile(i) : new Tile(i, true);
+      tiles.push(tile);
     }
   };
 
@@ -100,12 +108,22 @@ export default function KCanvas(props) {
     let newTiles = [];
 
     for (let i = 0; i < tiles.length; i++) {
-      let rand = Math.floor(Math.random() * tiles.length);
-      while (!tiles[rand]) {
-        rand = Math.floor(Math.random() * tiles.length);
+      if (locked.includes(i)) {
+        newTiles.push(tiles[i]);
+        continue;
       }
 
-      if (tiles[rand]) {
+      let rand = -1;
+      while (rand < 0 && !tiles[rand]) {
+        let temp = Math.floor(Math.random() * tiles.length);
+        if (tiles[temp]) {
+          if (!tiles[temp].locked) {
+            rand = temp;
+          }
+        }
+      }
+
+      if (true) {
         newTiles.push(tiles[rand]);
         newTiles[i].setIndex(i);
         tiles[rand] = null;
@@ -207,7 +225,7 @@ export default function KCanvas(props) {
   };
 
   class Tile {
-    constructor(index) {
+    constructor(index, locked = false) {
       this.index = {
         x: index % gridWidth,
         y: Math.floor(index / gridHeight),
@@ -216,6 +234,7 @@ export default function KCanvas(props) {
       this.color = { r: 0, g: 0, b: 0 };
       this.offset = { x: 0, y: 0 };
 
+      this.locked = locked;
       this.selected = false;
       this.selectedColor = { r: 122, g: 122, b: 122 };
     }
@@ -228,7 +247,7 @@ export default function KCanvas(props) {
       };
     }
 
-    rect() {
+    render() {
       ctx.fillStyle = packRGB(this.color.r, this.color.g, this.color.b);
       ctx.beginPath();
       if (selected == this) {
@@ -248,10 +267,19 @@ export default function KCanvas(props) {
       }
       ctx.fill();
       ctx.closePath();
-    }
 
-    render() {
-      this.rect();
+      if (this.locked) {
+        ctx.strokeStyle = "#FFFFFF";
+        ctx.beginPath();
+        ctx.arc(
+          (this.index.x + 0.5) * tileWidth,
+          (this.index.y + 0.5) * tileHeight,
+          5,
+          0,
+          2 * Math.PI
+        );
+        ctx.stroke();
+      }
     }
   }
 
