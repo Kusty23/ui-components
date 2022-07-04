@@ -29,10 +29,8 @@ export default function KCanvas(props) {
   };
 
   const genTiles = () => {
-    for (let col = 0; col < gridWidth; col++) {
-      for (let row = 0; row < gridHeight; row++) {
-        tiles.push(new Tile(row, col));
-      }
+    for (let i = 0; i < gridWidth * gridHeight; i++) {
+      tiles.push(new Tile(i));
     }
   };
 
@@ -98,8 +96,27 @@ export default function KCanvas(props) {
     }
   };
 
+  function shuffleTiles() {
+    let newTiles = [];
+
+    for (let i = 0; i < tiles.length; i++) {
+      let rand = Math.floor(Math.random() * tiles.length);
+      while (!tiles[rand]) {
+        rand = Math.floor(Math.random() * tiles.length);
+      }
+
+      if (tiles[rand]) {
+        newTiles.push(tiles[rand]);
+        newTiles[i].setIndex(i);
+        tiles[rand] = null;
+      }
+    }
+
+    tiles = newTiles;
+  }
+
   const draw = () => {
-    ctx.clearRect(0, 0, 300, 300);
+    ctx.clearRect(0, 0, 500, 500);
     tiles.forEach((tile) => {
       tile.render(ctx);
     });
@@ -119,6 +136,8 @@ export default function KCanvas(props) {
 
     genTiles();
     genGradient();
+
+    shuffleTiles();
 
     window.requestAnimationFrame(draw);
   }, [draw]);
@@ -144,7 +163,6 @@ export default function KCanvas(props) {
 
       let index = indexFromPos(mouse).index;
       selected = tiles[index];
-      console.log(selected, index, tiles);
       selected.selected = true;
 
       if (prev) {
@@ -171,6 +189,11 @@ export default function KCanvas(props) {
       var dx = e.offsetX - mouse.x;
       var dy = e.offsetY - mouse.y;
 
+      if (selected) {
+        selected.offset.x += dx;
+        selected.offset.y += dy;
+      }
+
       mouse.x = e.offsetX;
       mouse.y = e.offsetY;
     };
@@ -184,13 +207,25 @@ export default function KCanvas(props) {
   };
 
   class Tile {
-    constructor(x, y) {
-      this.index = { x: x, y: y };
+    constructor(index) {
+      this.index = {
+        x: index % gridWidth,
+        y: Math.floor(index / gridHeight),
+        index: index,
+      };
       this.color = { r: 0, g: 0, b: 0 };
-      this.pos = { x: x * tileWidth, y: y * tileHeight };
+      this.offset = { x: 0, y: 0 };
 
       this.selected = false;
       this.selectedColor = { r: 122, g: 122, b: 122 };
+    }
+
+    setIndex(newIndex) {
+      this.index = {
+        x: newIndex % gridWidth,
+        y: Math.floor(newIndex / gridHeight),
+        index: newIndex,
+      };
     }
 
     rect() {
@@ -198,8 +233,8 @@ export default function KCanvas(props) {
       ctx.beginPath();
       if (selected == this) {
         ctx.fillRect(
-          this.index.x * tileWidth - 5,
-          this.index.y * tileWidth - 5,
+          this.index.x * tileWidth - 5 + this.offset.x,
+          this.index.y * tileWidth - 5 + this.offset.y,
           tileWidth + 10,
           tileHeight + 10
         );
