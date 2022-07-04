@@ -13,7 +13,7 @@ export default function KCanvas(props) {
     topLeft: { r: 255, g: 0, b: 0 },
     botLeft: { r: 122, g: 0, b: 0 },
     topRight: { r: 70, g: 0, b: 0 },
-    botRight: { r: 0, g: 0, b: 0 },
+    botRight: { r: 0, g: 10, b: 0 },
   };
 
   let gradient = Array(5);
@@ -36,20 +36,14 @@ export default function KCanvas(props) {
   };
 
   const genTiles = () => {
-    for (let row = 0; row < 5; row++) {
-      for (let col = 0; col < 5; col++) {
+    for (let col = 0; col < 5; col++) {
+      for (let row = 0; row < 5; row++) {
         tiles.push(new Tile(row, col));
       }
     }
   };
 
   const genGradient = () => {
-    gradient[0] = [0, 0, 0, 0, 0];
-    gradient[1] = [0, 0, 0, 0, 0];
-    gradient[2] = [0, 0, 0, 0, 0];
-    gradient[3] = [0, 0, 0, 0, 0];
-    gradient[4] = [0, 0, 0, 0, 0];
-
     // First calculate left-right gradients
     // Top
     let rl = keyColors.topLeft.r;
@@ -57,12 +51,9 @@ export default function KCanvas(props) {
 
     let delr = (rr - rl) / (5 - 1); //one less than grid size
 
-    let row = [];
     for (let x = 0; x < 5; x++) {
-      row.push(rl + delr * x);
-      console.log(rl, delr, rl + delr);
+      tiles[x].color.r = rl + delr * x;
     }
-    gradient[0] = row;
 
     // Bottom
     rl = keyColors.botLeft.r;
@@ -70,25 +61,21 @@ export default function KCanvas(props) {
 
     delr = (rr - rl) / (5 - 1); //one less than grid size
 
-    row = [];
     for (let x = 0; x < 5; x++) {
-      row.push(rl + delr * x);
+      tiles[20 + x].color.r = rl + delr * x;
     }
-    gradient[4] = row;
 
-    // Then calculate top-bottom gradients for each column
-    for (let i = 0; i < 5; i++) {
-      let rt = gradient[0][i];
-      let rb = gradient[4][i];
+    // 1st col
+    for (let col = 0; col < 5; col++) {
+      let rt = tiles[col].color.r;
+      let rb = tiles[20 + col].color.r;
 
-      delr = (rb - rt) / (5 - 1); //one less than grid size
+      delr = (rb - rt) / (5 - 1);
 
-      for (let y = 0; y < 5; y++) {
-        gradient[y][i] = rt + delr * y;
+      for (let x = 0; x < 5; x++) {
+        tiles[x * 5 + col].color.r = rt + delr * x;
       }
     }
-
-    console.log(gradient);
   };
 
   const draw = () => {
@@ -109,10 +96,15 @@ export default function KCanvas(props) {
   class Tile {
     constructor(x, y) {
       this.index = { x: x, y: y };
+      this.color = { r: 0, g: 0, b: 0 };
     }
 
     render() {
-      rect(this.index.x * 50, this.index.y * 50, getColorByPos(this.index));
+      rect(
+        this.index.x * 50,
+        this.index.y * 50,
+        packRGB(this.color.r, this.color.g, this.color.b)
+      );
     }
   }
 
