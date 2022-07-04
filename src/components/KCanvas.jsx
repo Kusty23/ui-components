@@ -180,6 +180,9 @@ export default function KCanvas(props) {
       let prev = selected;
 
       let index = indexFromPos(mouse).index;
+      if (tiles[index].locked) {
+        return;
+      }
       selected = tiles[index];
       selected.selected = true;
 
