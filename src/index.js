@@ -13,6 +13,7 @@ import Carousels from "./pages/Carousels";
 import Blobs from "./pages/Blobs.jsx";
 import Buttons from "./pages/Buttons.jsx";
 import Grid from "./pages/Grid.jsx";
+import ILoveHue from "./pages/ILoveHue.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -36,6 +37,7 @@ root.render(
             ],
           },
           { text: "Blobs", href: "./blobs" },
+          { text: "I Love Hue", href: "./i-love-hue" },
         ]}
       />
       <Routes>
@@ -47,6 +49,7 @@ root.render(
         <Route path="/buttons" element={<Buttons />} />
         <Route path="/blobs" element={<Blobs />} />
         <Route path="/grid" element={<Grid />} />
+        <Route path="/i-love-hue" element={<ILoveHue />} />
       </Routes>
     </div>
   </BrowserRouter>
