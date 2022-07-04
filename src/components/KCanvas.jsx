@@ -15,6 +15,7 @@ export default function KCanvas(props) {
 
   let mouse = { x: -1, y: -1 };
   let dragging = false;
+  let selected;
 
   const keyColors = {
     topLeft: { r: 255, g: 0, b: 140 },
@@ -25,14 +26,6 @@ export default function KCanvas(props) {
 
   const packRGB = (r, g, b) => {
     return "rgb(" + r + "," + g + "," + b + ")";
-  };
-
-  const rect = (x, y, color) => {
-    ctx.fillStyle = color;
-    ctx.beginPath();
-    ctx.fillRect(x, y, tileWidth, tileHeight);
-    ctx.fill();
-    ctx.closePath();
   };
 
   const genTiles = () => {
@@ -110,6 +103,11 @@ export default function KCanvas(props) {
     tiles.forEach((tile) => {
       tile.render(ctx);
     });
+
+    if (selected) {
+      selected.render(ctx);
+    }
+
     window.requestAnimationFrame(draw);
   };
 
@@ -117,7 +115,7 @@ export default function KCanvas(props) {
     canvas = canvasRef.current;
     ctx = canvas.getContext("2d");
 
-    allowDrag(canvas);
+    addMouseListener(canvas);
 
     genTiles();
     genGradient();
@@ -134,7 +132,7 @@ export default function KCanvas(props) {
     return index;
   };
 
-  const allowDrag = (canvas) => {
+  const addMouseListener = (canvas) => {
     mouse = { x: -1, y: -1 };
     dragging = false;
 
@@ -142,8 +140,27 @@ export default function KCanvas(props) {
       mouse.x = e.offsetX;
       mouse.y = e.offsetY;
 
-      let selected = tiles[indexFromPos(mouse).index];
-      selected.color = { r: 255, g: 255, b: 255 };
+      let prev = selected;
+
+      let index = indexFromPos(mouse).index;
+      selected = tiles[index];
+      console.log(selected, index, tiles);
+      selected.selected = true;
+
+      if (prev) {
+        prev.selected = false;
+
+        if (selected) {
+          tiles[index] = prev;
+          tiles[prev.index.y * gridWidth + prev.index.x] = selected;
+
+          let oldindex = prev.index;
+          prev.index = selected.index;
+          selected.index = oldindex;
+          selected.selected = false;
+          selected = null;
+        }
+      }
 
       dragging = false;
       window.addEventListener("mousemove", (e) => mousemove(e), false);
@@ -171,14 +188,35 @@ export default function KCanvas(props) {
       this.index = { x: x, y: y };
       this.color = { r: 0, g: 0, b: 0 };
       this.pos = { x: x * tileWidth, y: y * tileHeight };
+
+      this.selected = false;
+      this.selectedColor = { r: 122, g: 122, b: 122 };
+    }
+
+    rect() {
+      ctx.fillStyle = packRGB(this.color.r, this.color.g, this.color.b);
+      ctx.beginPath();
+      if (selected == this) {
+        ctx.fillRect(
+          this.index.x * tileWidth - 5,
+          this.index.y * tileWidth - 5,
+          tileWidth + 10,
+          tileHeight + 10
+        );
+      } else {
+        ctx.fillRect(
+          this.index.x * tileWidth,
+          this.index.y * tileWidth,
+          tileWidth,
+          tileHeight
+        );
+      }
+      ctx.fill();
+      ctx.closePath();
     }
 
     render() {
-      rect(
-        this.pos.x,
-        this.pos.y,
-        packRGB(this.color.r, this.color.g, this.color.b)
-      );
+      this.rect();
     }
   }
 
