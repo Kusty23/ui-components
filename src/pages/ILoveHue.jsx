@@ -7,13 +7,15 @@ export default function ILoveHue(props) {
   const canvasRef = React.useRef(null);
 
   let canvas;
+  const canvasOffset = { x: 100, y: 50 };
+
   let ctx;
   let tiles = [];
   const tileHeight = 70;
   const tileWidth = 70;
 
-  const gridHeight = 3;
-  const gridWidth = 3;
+  const gridHeight = 7;
+  const gridWidth = 7;
 
   let mouse = { x: -1, y: -1 };
   let dragging = false;
@@ -136,7 +138,7 @@ export default function ILoveHue(props) {
   }
 
   const draw = () => {
-    ctx.clearRect(0, 0, 500, 500);
+    ctx.clearRect(0, 0, 1000, 1000);
     tiles.forEach((tile) => {
       tile.render(ctx);
     });
@@ -164,8 +166,8 @@ export default function ILoveHue(props) {
 
   const indexFromPos = (mouse) => {
     let index = {};
-    index.x = Math.floor(mouse.x / tileWidth);
-    index.y = Math.floor(mouse.y / tileHeight);
+    index.x = Math.floor((mouse.x - canvasOffset.x) / tileWidth);
+    index.y = Math.floor((mouse.y - canvasOffset.y) / tileHeight);
     index.index = index.y * gridWidth + index.x;
 
     return index;
@@ -277,15 +279,15 @@ export default function ILoveHue(props) {
       ctx.beginPath();
       if (selected == this) {
         ctx.fillRect(
-          this.index.x * tileWidth - 5 + this.offset.x,
-          this.index.y * tileWidth - 5 + this.offset.y,
+          this.index.x * tileWidth - 5 + this.offset.x + canvasOffset.x,
+          this.index.y * tileWidth - 5 + this.offset.y + canvasOffset.y,
           tileWidth + 10,
           tileHeight + 10
         );
       } else {
         ctx.fillRect(
-          this.index.x * tileWidth,
-          this.index.y * tileWidth,
+          this.index.x * tileWidth + canvasOffset.x,
+          this.index.y * tileWidth + canvasOffset.y,
           tileWidth,
           tileHeight
         );
@@ -297,8 +299,8 @@ export default function ILoveHue(props) {
         ctx.strokeStyle = "#FFFFFF";
         ctx.beginPath();
         ctx.arc(
-          (this.index.x + 0.5) * tileWidth,
-          (this.index.y + 0.5) * tileHeight,
+          (this.index.x + 0.5) * tileWidth + canvasOffset.x,
+          (this.index.y + 0.5) * tileHeight + canvasOffset.y,
           5,
           0,
           2 * Math.PI
@@ -310,6 +312,7 @@ export default function ILoveHue(props) {
 
   return (
     <KSiteContainer
+      siteName="ILoveHue"
       content={
         <>
           <h1>I Love Hue More</h1>

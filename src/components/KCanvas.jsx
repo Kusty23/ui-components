@@ -3,6 +3,6 @@ import React from "react";
 
 export default function KCanvas(props) {
   return (
-    <canvas width="700px" height="500px" ref={props.canvasref} {...props} />
+    <canvas width="700px" height="600px" ref={props.canvasref} {...props} />
   );
 }
