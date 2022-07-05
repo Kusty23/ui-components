@@ -19,12 +19,13 @@ export default function ILoveHue(props) {
   const tileHeight = 70;
   const tileWidth = 70;
 
-  const gridHeight = 7;
-  const gridWidth = 7;
+  const gridHeight = 5;
+  const gridWidth = 5;
 
   let mouse = { x: -1, y: -1 };
   let dragging = false;
   let selected;
+  let prev;
 
   const keyColors = {
     topLeft: { r: 255, g: 0, b: 140 },
@@ -207,7 +208,7 @@ export default function ILoveHue(props) {
       mouse.x = e.offsetX;
       mouse.y = e.offsetY;
 
-      let prev = selected;
+      prev = selected;
 
       if (mouse.x > gridWidth * tileWidth + canvasOffset.x - 1) {
         return;
@@ -236,8 +237,6 @@ export default function ILoveHue(props) {
           selected.offset.y = 0;
           selected.selected = false;
           selected = null;
-
-          console.log(isComplete());
         }
       }
 
@@ -260,6 +259,41 @@ export default function ILoveHue(props) {
     };
 
     const mouseup = (e) => {
+      if (mouse.x > gridWidth * tileWidth + canvasOffset.x - 1) {
+        isComplete();
+        return;
+      }
+      if (!prev) {
+        prev = selected;
+
+        let index = indexFromPos(mouse).index;
+        if (tiles[index].locked) {
+          isComplete();
+          return;
+        }
+        selected = tiles[index];
+        selected.selected = true;
+
+        if (prev) {
+          prev.selected = false;
+
+          if (selected) {
+            tiles[index] = prev;
+            tiles[prev.index.y * gridWidth + prev.index.x] = selected;
+
+            let oldindex = prev.index;
+            prev.index = selected.index;
+            prev.offset.x = 0;
+            prev.offset.y = 0;
+            selected.index = oldindex;
+            selected.offset.x = 0;
+            selected.offset.y = 0;
+            selected.selected = false;
+            selected = null;
+          }
+        }
+      }
+      isComplete();
       window.removeEventListener("mousemove", mousemove, false);
       window.removeEventListener("mouseup", mouseup, false);
     };
