@@ -1,10 +1,14 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 
 import KSiteContainer from "../components/KSiteContainer";
 import KCanvas from "../components/KCanvas";
+import KLogo from "../components/KLogo";
 
 export default function ILoveHue(props) {
+  const [showWin, setShowWin] = useState("");
   const canvasRef = React.useRef(null);
+
+  let logoStyle = "";
 
   let canvas;
   const canvasOffset = { x: 100, y: 50 };
@@ -14,8 +18,8 @@ export default function ILoveHue(props) {
   const tileHeight = 70;
   const tileWidth = 70;
 
-  const gridHeight = 7;
-  const gridWidth = 7;
+  const gridHeight = 3;
+  const gridWidth = 3;
 
   let mouse = { x: -1, y: -1 };
   let dragging = false;
@@ -180,6 +184,10 @@ export default function ILoveHue(props) {
         val = false;
       }
     });
+
+    if (val) {
+      setShowWin("show");
+    }
     return val;
   }
 
@@ -318,6 +326,9 @@ export default function ILoveHue(props) {
       siteName="ILoveHue"
       content={
         <>
+          <div className={"win " + showWin}>
+            <KLogo />
+          </div>
           <h1>I Love Hue More</h1>
           <KCanvas canvasref={canvasRef} />
         </>

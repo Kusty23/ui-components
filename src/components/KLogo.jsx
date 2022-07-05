@@ -4,7 +4,7 @@ export default class KLogo extends Component {
   render() {
     return (
       <svg
-        className="KLogo"
+        className={"KLogo " + this.props.classStyle}
         version="1.1"
         id="Layer_1"
         xmlns="http://www.w3.org/2000/svg"
