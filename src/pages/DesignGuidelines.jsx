@@ -96,16 +96,11 @@ export default class DesignGuidelines extends Component {
           title="Top Nav Menus"
           content={
             <>
-              <KTopMenu
-                logo="./logo.svg"
-                index="0"
-                content={["link1", "link2", "link3"]}
-              />
+              <KTopMenu index="0" content={["link1", "link2", "link3"]} />
               <KCodeBlock
                 classStyle="span--12"
                 content={
                   "<KTopMenu\n" +
-                  '    logo="./logo.svg"\n' +
                   '    index="0"\n' +
                   '    content={["link1", "link2", "link3"]}\n' +
                   "/>"

@@ -16,7 +16,6 @@ export default class NavMenus extends Component {
                 title="Basic"
                 content={
                   <KTopMenu
-                    logo="./logo.svg"
                     index="0"
                     content={[
                       { text: "Link 1", href: "#Basic" },
@@ -45,7 +44,6 @@ export default class NavMenus extends Component {
                 content={
                   <KTopMenu
                     style="highlight"
-                    logo="./logo.svg"
                     index="0"
                     content={[
                       { text: "Link 1", href: "#Highlight" },
@@ -74,7 +72,6 @@ export default class NavMenus extends Component {
                 content={
                   <KTopMenu
                     style="bubble"
-                    logo="./logo.svg"
                     index="0"
                     content={[
                       { text: "Link 1", href: "#Bubble" },
@@ -103,7 +100,6 @@ export default class NavMenus extends Component {
                 content={
                   <KTopMenu
                     style="underline"
-                    logo="./logo.svg"
                     index="0"
                     content={[
                       { text: "Link 1", href: "#Underline" },

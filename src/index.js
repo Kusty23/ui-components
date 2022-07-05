@@ -21,7 +21,6 @@ root.render(
   <BrowserRouter>
     <div className="app">
       <KTopMenu
-        logo="./logo.svg"
         index="0"
         content={[
           { text: "Guideline", href: "./guideline" },

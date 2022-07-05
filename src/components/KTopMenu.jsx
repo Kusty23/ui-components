@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import KMenuGroup from "./KMenuGroup";
 import KMenuLink from "./KMenuLink";
+import KLogo from "./KLogo";
 
 export default function KTopMenu(props) {
   const [selected, setSelected] = useState(null);
@@ -35,9 +36,7 @@ export default function KTopMenu(props) {
 
   return (
     <div className={classStyle}>
-      <a href="./">
-        <img src={props.logo}></img>
-      </a>
+      <KLogo />
 
       <div>{links}</div>
     </div>
