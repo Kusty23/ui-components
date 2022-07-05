@@ -3,6 +3,7 @@ import React, { Component, useState } from "react";
 import KSiteContainer from "../components/KSiteContainer";
 import KCanvas from "../components/KCanvas";
 import KLogo from "../components/KLogo";
+import KButton from "../components/KButton";
 
 export default function ILoveHue(props) {
   const [showWin, setShowWin] = useState("");
@@ -18,8 +19,8 @@ export default function ILoveHue(props) {
   const tileHeight = 70;
   const tileWidth = 70;
 
-  const gridHeight = 3;
-  const gridWidth = 3;
+  const gridHeight = 7;
+  const gridWidth = 7;
 
   let mouse = { x: -1, y: -1 };
   let dragging = false;
@@ -154,6 +155,15 @@ export default function ILoveHue(props) {
     window.requestAnimationFrame(draw);
   };
 
+  function newGame() {
+    tiles = [];
+    genTiles();
+    genGradient();
+    shuffleTiles();
+
+    setShowWin("");
+  }
+
   React.useEffect(() => {
     canvas = canvasRef.current;
     ctx = canvas.getContext("2d");
@@ -162,8 +172,6 @@ export default function ILoveHue(props) {
 
     genTiles();
     genGradient();
-
-    shuffleTiles();
 
     window.requestAnimationFrame(draw);
   }, [draw]);
@@ -331,6 +339,9 @@ export default function ILoveHue(props) {
           </div>
           <h1>I Love Hue More</h1>
           <KCanvas canvasref={canvasRef} />
+          <div>
+            <KButton onclick={newGame} icon="done" label="Start New Game" />
+          </div>
         </>
       }
     ></KSiteContainer>

@@ -19,6 +19,7 @@ class KButton extends Component {
     if (this.props.light) {
       return (
         <button
+          onClick={this.props.onclick}
           className={"KLightInput KButton " + this.props.classStyle}
           style={{
             borderColor: "var(" + color + ")",
@@ -34,6 +35,7 @@ class KButton extends Component {
     } else {
       return (
         <button
+          onClick={this.props.onclick}
           className={"KInput KButton " + this.props.classStyle}
           style={{
             backgroundColor: "var(" + color + ")",
