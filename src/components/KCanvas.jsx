@@ -10,8 +10,8 @@ export default function KCanvas(props) {
   const tileHeight = 70;
   const tileWidth = 70;
 
-  const gridHeight = 5;
-  const gridWidth = 5;
+  const gridHeight = 3;
+  const gridWidth = 3;
 
   let mouse = { x: -1, y: -1 };
   let dragging = false;
@@ -169,6 +169,16 @@ export default function KCanvas(props) {
     return index;
   };
 
+  function isComplete() {
+    let val = true;
+    tiles.forEach((tile) => {
+      if (tile.index.index != tile.initialIndex.index) {
+        val = false;
+      }
+    });
+    return val;
+  }
+
   const addMouseListener = (canvas) => {
     mouse = { x: -1, y: -1 };
     dragging = false;
@@ -185,6 +195,7 @@ export default function KCanvas(props) {
       }
       selected = tiles[index];
       selected.selected = true;
+      console.log(selected.index, selected.initialIndex);
 
       if (prev) {
         prev.selected = false;
@@ -195,9 +206,15 @@ export default function KCanvas(props) {
 
           let oldindex = prev.index;
           prev.index = selected.index;
+          prev.offset.x = 0;
+          prev.offset.y = 0;
           selected.index = oldindex;
+          selected.offset.x = 0;
+          selected.offset.y = 0;
           selected.selected = false;
           selected = null;
+
+          console.log(isComplete());
         }
       }
 
@@ -234,6 +251,7 @@ export default function KCanvas(props) {
         y: Math.floor(index / gridHeight),
         index: index,
       };
+      this.initialIndex = this.index;
       this.color = { r: 0, g: 0, b: 0 };
       this.offset = { x: 0, y: 0 };
 
@@ -248,6 +266,8 @@ export default function KCanvas(props) {
         y: Math.floor(newIndex / gridHeight),
         index: newIndex,
       };
+      this.offset.x = 0;
+      this.offset.y = 0;
     }
 
     render() {
