@@ -193,13 +193,16 @@ export default function ILoveHue(props) {
 
       let prev = selected;
 
+      if (mouse.x > gridWidth * tileWidth + canvasOffset.x - 1) {
+        return;
+      }
+
       let index = indexFromPos(mouse).index;
       if (tiles[index].locked) {
         return;
       }
       selected = tiles[index];
       selected.selected = true;
-      console.log(selected.index, selected.initialIndex);
 
       if (prev) {
         prev.selected = false;
