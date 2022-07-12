@@ -11,21 +11,24 @@ export default function ILoveHue(props) {
 
   let logoStyle = "";
 
+  let animationRequestId;
+
   let canvas;
   const canvasOffset = { x: 100, y: 50 };
 
   let ctx;
   let tiles = [];
-  const tileHeight = 70;
-  const tileWidth = 70;
+  const tileHeight = 50;
+  const tileWidth = 50;
 
-  const gridHeight = 5;
-  const gridWidth = 5;
+  const gridHeight = 10;
+  const gridWidth = 10;
 
   let mouse = { x: -1, y: -1 };
   let dragging = false;
   let selected;
   let prev;
+  let hasMoved = false;
 
   const keyColors = {
     topLeft: { r: 255, g: 0, b: 140 },
@@ -134,9 +137,11 @@ export default function ILoveHue(props) {
       }
 
       if (true) {
+        tiles[rand].setIndex(i);
         newTiles.push(tiles[rand]);
         newTiles[i].setIndex(i);
         tiles[rand] = null;
+        console.log(i, "<-->", rand);
       }
     }
 
@@ -152,15 +157,14 @@ export default function ILoveHue(props) {
     if (selected) {
       selected.render(ctx);
     }
-
     window.requestAnimationFrame(draw);
   };
 
   function newGame() {
-    tiles = [];
-    genTiles();
-    genGradient();
+    hasMoved = false;
     shuffleTiles();
+
+    console.log(tiles);
 
     setShowWin("");
   }
@@ -174,7 +178,7 @@ export default function ILoveHue(props) {
     genTiles();
     genGradient();
 
-    window.requestAnimationFrame(draw);
+    animationRequestId = window.requestAnimationFrame(draw);
   }, [draw]);
 
   const indexFromPos = (mouse) => {
@@ -187,6 +191,10 @@ export default function ILoveHue(props) {
   };
 
   function isComplete() {
+    if (!hasMoved) {
+      return false;
+    }
+
     let val = true;
     tiles.forEach((tile) => {
       if (tile.index.index != tile.initialIndex.index) {
@@ -210,7 +218,11 @@ export default function ILoveHue(props) {
 
       prev = selected;
 
-      if (mouse.x > gridWidth * tileWidth + canvasOffset.x - 1) {
+      if (
+        mouse.x > gridWidth * tileWidth + canvasOffset.x - 1 ||
+        mouse.y > gridHeight * tileHeight + canvasOffset.y
+      ) {
+        console.log(".");
         return;
       }
 
@@ -261,12 +273,18 @@ export default function ILoveHue(props) {
     const mouseup = (e) => {
       if (mouse.x > gridWidth * tileWidth + canvasOffset.x - 1) {
         isComplete();
+        console.log(".");
         return;
       }
       if (!prev) {
         prev = selected;
 
         let index = indexFromPos(mouse).index;
+
+        if (!tiles[index]) {
+          return;
+        }
+
         if (tiles[index].locked) {
           isComplete();
           return;
@@ -290,6 +308,8 @@ export default function ILoveHue(props) {
             selected.offset.y = 0;
             selected.selected = false;
             selected = null;
+
+            hasMoved = true;
           }
         }
       }

@@ -14,6 +14,7 @@ import Blobs from "./pages/Blobs.jsx";
 import Buttons from "./pages/Buttons.jsx";
 import Grid from "./pages/Grid.jsx";
 import ILoveHue from "./pages/ILoveHue.jsx";
+import CircuitSimulation from "./pages/CircuitSimulation.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
@@ -37,6 +38,7 @@ root.render(
           },
           { text: "Blobs", href: "./blobs" },
           { text: "I Love Hue", href: "./i-love-hue" },
+          { text: "Circuit Simulation", href: "./circuit" },
         ]}
       />
       <Routes>
@@ -49,6 +51,7 @@ root.render(
         <Route path="/blobs" element={<Blobs />} />
         <Route path="/grid" element={<Grid />} />
         <Route path="/i-love-hue" element={<ILoveHue />} />
+        <Route path="/circuit" element={<CircuitSimulation />} />
       </Routes>
     </div>
   </BrowserRouter>
