@@ -63,8 +63,4 @@ export default class KCanvas {
 
     window.requestAnimationFrame(this.Draw.bind(this));
   }
-
-  PackRGB(r, g, b) {
-    return "rgb(" + r + "," + g + "," + b + ")";
-  }
 }

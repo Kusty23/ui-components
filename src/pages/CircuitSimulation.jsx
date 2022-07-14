@@ -3,6 +3,7 @@ import React from "react";
 import KSiteContainer from "../components/KSiteContainer";
 import KCanvas from "../canvas/KCanvas.js";
 import KMovableEntity from "../canvas/KMovableEntity.js";
+import { PackRGB } from "../canvas/KCanvasHelpers.js";
 
 let nodes = [];
 let selected;
@@ -74,11 +75,15 @@ class Node extends KMovableEntity {
     return;
   }
 
+  OnSignal() {
+    this.Activate();
+  }
+
   Activate() {
     this.active = true;
 
     for (let i = 0; i < this.connections.length; i++) {
-      this.connections[i].Activate();
+      this.connections[i].OnSignal();
     }
   }
 
@@ -145,6 +150,11 @@ class ClockNode extends Node {
 }
 
 class SwitchNode extends Node {
+  constructor(x, y) {
+    super(x, y);
+    this.color = PackRGB(255, 0, 0);
+  }
+
   OnClick() {
     if (this.active) {
       this.Deactivate();
@@ -154,12 +164,27 @@ class SwitchNode extends Node {
   }
 }
 
+class AndGate extends Node {
+  constructor(x, y, node1, node2) {
+    super(x, y);
+
+    this.node1 = node1;
+    this.node1.AddConnection(this);
+    this.node2 = node2;
+    this.node2.AddConnection(this);
+  }
+
+  OnSignal() {
+    if (this.node1.active && this.node2.active) {
+      this.Activate();
+    }
+  }
+}
+
 // Main Logic
-
-nodes.push(new Node(200, 100));
-nodes.push(new Node(100, 100, 2000));
 nodes.push(new SwitchNode(200, 300));
+nodes.push(new SwitchNode(200, 200));
+nodes.push(new Node(400, 250));
+nodes.push(new AndGate(300, 250, nodes[0], nodes[1]));
 
-nodes[0].AddConnection(nodes[1]);
-nodes[0].AddConnection(nodes[2]);
-nodes[2].AddConnection(nodes[1]);
+nodes[3].AddConnection(nodes[2]);
