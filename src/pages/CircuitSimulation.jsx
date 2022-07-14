@@ -4,7 +4,7 @@ import KSiteContainer from "../components/KSiteContainer";
 import KCanvas from "../canvas/KCanvas.js";
 import KMovableEntity from "../canvas/KMovableEntity.js";
 
-let boxes = [];
+let nodes = [];
 let selected;
 
 export default function CircuitSimulation(props) {
@@ -34,10 +34,10 @@ export default function CircuitSimulation(props) {
 }
 
 function onMouseDown(x, y) {
-  boxes.forEach((box) => {
-    if (box.ContainsPoint(x, y)) {
-      selected = box;
-      box.active = true;
+  nodes.forEach((node) => {
+    if (node.ContainsPoint(x, y)) {
+      selected = node;
+      node.Activate();
     }
   });
 }
@@ -51,23 +51,39 @@ function onMouseMove(x, y, dx, dy) {
 
 function onMouseUp(x, y) {
   if (selected) {
-    selected.active = false;
+    selected.Deactivate();
     selected = null;
   }
 }
 
 function onDraw(ctx) {
   //console.log(ctx);
-  for (let i = 0; i < boxes.length; i++) {
-    boxes[i].Render(ctx);
+  for (let i = 0; i < nodes.length; i++) {
+    nodes[i].Render(ctx);
   }
 }
 
-class Box extends KMovableEntity {
+class Node extends KMovableEntity {
   constructor(x, y) {
     super(x, y, 50, 50);
 
     this.connections = [];
+  }
+
+  Activate() {
+    this.active = true;
+
+    for (let i = 0; i < this.connections.length; i++) {
+      this.connections[i].Activate();
+    }
+  }
+
+  Deactivate() {
+    this.active = false;
+
+    for (let i = 0; i < this.connections.length; i++) {
+      this.connections[i].Deactivate();
+    }
   }
 
   Render(ctx) {
@@ -95,12 +111,41 @@ class Box extends KMovableEntity {
   }
 }
 
+class ClockNode extends Node {
+  constructor(x, y, delay) {
+    super(x, y);
+
+    this.delay = delay;
+    this.timerInterval = null;
+
+    this.start();
+  }
+
+  start() {
+    this.stop(); // stoping the previous counting (if any)
+    this.timerInterval = setInterval(this.turnOn.bind(this), this.delay);
+  }
+
+  turnOn() {
+    if (this.active) {
+      this.Deactivate();
+    } else {
+      this.Activate();
+    }
+  }
+
+  stop() {
+    clearInterval(this.timerInterval);
+    this.Deactivate();
+  }
+}
+
 // Main Logic
 
-boxes.push(new Box(100, 100));
-boxes.push(new Box(200, 300));
-boxes.push(new Box(200, 100));
+nodes.push(new ClockNode(100, 100, 2000));
+nodes.push(new Node(200, 300));
+nodes.push(new Node(200, 100));
 
-boxes[0].AddConnection(boxes[1]);
-boxes[0].AddConnection(boxes[2]);
-boxes[2].AddConnection(boxes[1]);
+nodes[0].AddConnection(nodes[1]);
+nodes[0].AddConnection(nodes[2]);
+nodes[2].AddConnection(nodes[1]);
