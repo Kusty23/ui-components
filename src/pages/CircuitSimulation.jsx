@@ -75,15 +75,19 @@ class Node extends KMovableEntity {
     return;
   }
 
-  OnSignal() {
-    this.Activate();
+  OnSignal(signal) {
+    if (signal) {
+      this.Activate();
+    } else {
+      this.Deactivate();
+    }
   }
 
   Activate() {
     this.active = true;
 
     for (let i = 0; i < this.connections.length; i++) {
-      this.connections[i].OnSignal();
+      this.connections[i].OnSignal(true);
     }
   }
 
@@ -91,7 +95,7 @@ class Node extends KMovableEntity {
     this.active = false;
 
     for (let i = 0; i < this.connections.length; i++) {
-      this.connections[i].Deactivate();
+      this.connections[i].OnSignal(false);
     }
   }
 
@@ -157,9 +161,9 @@ class SwitchNode extends Node {
 
   OnClick() {
     if (this.active) {
-      this.Deactivate();
+      this.OnSignal(false);
     } else {
-      this.Activate();
+      this.OnSignal(true);
     }
   }
 }
@@ -174,9 +178,30 @@ class AndGate extends Node {
     this.node2.AddConnection(this);
   }
 
-  OnSignal() {
+  OnSignal(signal) {
     if (this.node1.active && this.node2.active) {
       this.Activate();
+    } else {
+      this.Deactivate();
+    }
+  }
+}
+
+class OrGate extends Node {
+  constructor(x, y, node1, node2) {
+    super(x, y);
+
+    this.node1 = node1;
+    this.node1.AddConnection(this);
+    this.node2 = node2;
+    this.node2.AddConnection(this);
+  }
+
+  OnSignal(signal) {
+    if (this.node1.active || this.node2.active) {
+      this.Activate();
+    } else {
+      this.Deactivate();
     }
   }
 }
