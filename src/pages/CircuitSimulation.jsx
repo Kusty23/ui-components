@@ -71,17 +71,23 @@ class Box extends KMovableEntity {
   }
 
   Render(ctx) {
-    ctx.fillStyle = this.active ? "rgb(255,255,255)" : this.color;
-    ctx.fillRect(this.pos.x, this.pos.y, this.size.width, this.size.height);
-
     for (let i = 0; i < this.connections.length; i++) {
       let other = this.connections[i];
       ctx.beginPath();
-      ctx.moveTo(this.pos.x, this.pos.y);
-      ctx.lineTo(other.pos.x, other.pos.y);
+      ctx.moveTo(
+        this.pos.x + this.size.width / 2,
+        this.pos.y + this.size.height / 2
+      );
+      ctx.lineTo(
+        other.pos.x + other.size.width / 2,
+        other.pos.y + other.size.height / 2
+      );
       ctx.stroke();
       ctx.closePath();
     }
+
+    ctx.fillStyle = this.active ? "rgb(255,255,255)" : this.color;
+    ctx.fillRect(this.pos.x, this.pos.y, this.size.width, this.size.height);
   }
 
   AddConnection(box) {
@@ -93,5 +99,8 @@ class Box extends KMovableEntity {
 
 boxes.push(new Box(100, 100));
 boxes.push(new Box(200, 300));
+boxes.push(new Box(200, 100));
 
 boxes[0].AddConnection(boxes[1]);
+boxes[0].AddConnection(boxes[2]);
+boxes[2].AddConnection(boxes[1]);
