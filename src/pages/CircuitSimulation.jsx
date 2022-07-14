@@ -36,7 +36,7 @@ export default function CircuitSimulation(props) {
 
 function onMouseDown(x, y) {
   nodes.forEach((node) => {
-    if (node.ContainsPoint(x, y)) {
+    if (node.ContainsPointEllipse(x, y)) {
       selected = node;
       node.OnClick();
     }
@@ -66,7 +66,7 @@ function onDraw(ctx) {
 
 class Node extends KMovableEntity {
   constructor(x, y) {
-    super(x, y, 50, 50);
+    super(x, y, 20, 20);
 
     this.connections = [];
   }
@@ -103,20 +103,26 @@ class Node extends KMovableEntity {
     for (let i = 0; i < this.connections.length; i++) {
       let other = this.connections[i];
       ctx.beginPath();
-      ctx.moveTo(
-        this.pos.x + this.size.width / 2,
-        this.pos.y + this.size.height / 2
-      );
-      ctx.lineTo(
-        other.pos.x + other.size.width / 2,
-        other.pos.y + other.size.height / 2
-      );
+      ctx.moveTo(this.pos.x, this.pos.y);
+      ctx.lineTo(other.pos.x, other.pos.y);
       ctx.stroke();
       ctx.closePath();
     }
 
     ctx.fillStyle = this.active ? "rgb(255,255,255)" : this.color;
-    ctx.fillRect(this.pos.x, this.pos.y, this.size.width, this.size.height);
+    //ctx.fillRect(this.pos.x, this.pos.y, this.size.width, this.size.height);
+    ctx.beginPath();
+    ctx.ellipse(
+      this.pos.x,
+      this.pos.y,
+      this.size.width,
+      this.size.height,
+      0,
+      0,
+      Math.PI * 2
+    );
+    ctx.fill();
+    ctx.closePath();
   }
 
   AddConnection(box) {

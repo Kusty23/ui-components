@@ -7,11 +7,18 @@ export default class KMovableEntity {
     this.active = false;
   }
 
-  ContainsPoint(x, y) {
+  ContainsPointRect(x, y) {
     return (
       Math.abs(this.pos.x - x) < this.size.width &&
       Math.abs(this.pos.y - y) < this.size.height
     );
+  }
+
+  ContainsPointEllipse(x, y) {
+    let valx = (x - this.pos.x) ** 2 / this.size.width ** 2;
+    let valy = (y - this.pos.y) ** 2 / this.size.height ** 2;
+
+    return valx + valy < 1;
   }
 
   Render(ctx) {
