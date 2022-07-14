@@ -37,7 +37,7 @@ function onMouseDown(x, y) {
   nodes.forEach((node) => {
     if (node.ContainsPoint(x, y)) {
       selected = node;
-      node.Activate();
+      node.OnClick();
     }
   });
 }
@@ -51,7 +51,7 @@ function onMouseMove(x, y, dx, dy) {
 
 function onMouseUp(x, y) {
   if (selected) {
-    selected.Deactivate();
+    //selected.Deactivate();
     selected = null;
   }
 }
@@ -68,6 +68,10 @@ class Node extends KMovableEntity {
     super(x, y, 50, 50);
 
     this.connections = [];
+  }
+
+  OnClick() {
+    return;
   }
 
   Activate() {
@@ -140,11 +144,21 @@ class ClockNode extends Node {
   }
 }
 
+class SwitchNode extends Node {
+  OnClick() {
+    if (this.active) {
+      this.Deactivate();
+    } else {
+      this.Activate();
+    }
+  }
+}
+
 // Main Logic
 
-nodes.push(new ClockNode(100, 100, 2000));
-nodes.push(new Node(200, 300));
 nodes.push(new Node(200, 100));
+nodes.push(new Node(100, 100, 2000));
+nodes.push(new SwitchNode(200, 300));
 
 nodes[0].AddConnection(nodes[1]);
 nodes[0].AddConnection(nodes[2]);
