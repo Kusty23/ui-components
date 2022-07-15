@@ -7,6 +7,9 @@ export class Node extends KMovableEntity {
 
     this.connections = [];
     this.canMove = false;
+
+    this.color = PackRGB(123, 123, 235);
+    this.highlightColor = PackRGB(163, 163, 255);
   }
 
   OnClick() {
@@ -40,6 +43,10 @@ export class Node extends KMovableEntity {
   Render(ctx) {
     for (let i = 0; i < this.connections.length; i++) {
       let other = this.connections[i];
+
+      ctx.lineWidth = 10;
+      ctx.strokeStyle = this.active ? PackRGB(255, 255, 255) : PackRGB(0, 0, 0);
+
       ctx.beginPath();
       ctx.moveTo(this.pos.x, this.pos.y);
       ctx.lineTo(other.pos.x, other.pos.y);
@@ -47,7 +54,9 @@ export class Node extends KMovableEntity {
       ctx.closePath();
     }
 
-    ctx.fillStyle = this.active ? "rgb(255,255,255)" : this.color;
+    ctx.fillStyle = this.active ? this.highlightColor : this.color;
+    ctx.strokeStyle = this.active ? this.color : PackRGB(0, 0, 0);
+    ctx.lineWidth = 5;
     ctx.beginPath();
     ctx.ellipse(
       this.pos.x,
@@ -59,7 +68,21 @@ export class Node extends KMovableEntity {
       Math.PI * 2
     );
     ctx.fill();
+    ctx.stroke();
     ctx.closePath();
+
+    this.DrawLabel(ctx);
+  }
+
+  DrawLabel(ctx) {
+    ctx.font = "30px  Arial";
+    ctx.fillStyle = "black";
+    ctx.textAlign = "center";
+    if (this.active) {
+      ctx.fillText("1", this.pos.x, this.pos.y + 10);
+    } else {
+      ctx.fillText("0", this.pos.x, this.pos.y + 10);
+    }
   }
 
   AddConnection(box) {
@@ -99,7 +122,9 @@ export class ClockNode extends Node {
 export class SwitchNode extends Node {
   constructor(x, y) {
     super(x, y);
-    this.color = PackRGB(255, 0, 0);
+
+    this.color = PackRGB(220, 120, 120);
+    this.highlightColor = PackRGB(255, 160, 160);
   }
 
   OnClick() {
@@ -111,16 +136,22 @@ export class SwitchNode extends Node {
   }
 }
 
-export class AndGate extends Node {
+export class AndGate extends GateNode {
   constructor(x, y, node1, node2) {
-    super(x, y);
-
-    this.color = PackRGB(255, 255, 0);
+    super(x, y, "AND");
 
     this.node1 = node1;
     this.node1.AddConnection(this);
     this.node2 = node2;
     this.node2.AddConnection(this);
+  }
+
+  DrawLabel(ctx) {
+    ctx.font = "20px  Arial";
+    ctx.fillStyle = "black";
+    ctx.textAlign = "center";
+
+    ctx.fillText("AND", this.pos.x, this.pos.y + 8);
   }
 
   OnSignal(signal) {
@@ -129,6 +160,25 @@ export class AndGate extends Node {
     } else {
       this.Deactivate();
     }
+  }
+}
+
+class GateNode extends Node {
+  constructor(x, y, label) {
+    super(x, y);
+
+    this.label = label;
+
+    this.color = PackRGB(220, 220, 20);
+    this.highlightColor = PackRGB(255, 255, 160);
+  }
+
+  DrawLabel(ctx) {
+    ctx.font = "20px  Arial";
+    ctx.fillStyle = "black";
+    ctx.textAlign = "center";
+
+    ctx.fillText(this.label, this.pos.x, this.pos.y + 8);
   }
 }
 
@@ -151,11 +201,9 @@ export class OrGate extends Node {
   }
 }
 
-export class NotGate extends Node {
+export class NotGate extends GateNode {
   constructor(x, y, node) {
-    super(x, y);
-
-    this.color = PackRGB(0, 0, 255);
+    super(x, y, "NOT");
 
     this.node = node;
     this.node.AddConnection(this);
