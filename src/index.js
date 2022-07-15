@@ -14,7 +14,7 @@ import Blobs from "./pages/Blobs.jsx";
 import Buttons from "./pages/Buttons.jsx";
 import Grid from "./pages/Grid.jsx";
 import ILoveHue from "./pages/ILoveHue.jsx";
-import CircuitSimulation from "./pages/Circuits/CircuitSimulation.jsx";
+import CircuitSimulation from "./pages/Circuits/BasicCircuitComponents.jsx/CircuitSimulation.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

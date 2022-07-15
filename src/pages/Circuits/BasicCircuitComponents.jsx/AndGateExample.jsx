@@ -1,13 +1,13 @@
 import React from "react";
 
-import KCanvas from "../../canvas/KCanvas.js";
+import KCanvas from "../../../canvas/KCanvas.js";
 
-import { Node, SwitchNode, NotGate } from "./Nodes.js";
+import { Node, SwitchNode, AndGate } from "../Nodes.js";
 
 let nodes = [];
 let selected;
 
-export default function NotGateExample(props) {
+export default function AndGateExample(props) {
   // Canvas
   const canvasRef = React.useRef(null);
 
@@ -24,11 +24,11 @@ export default function NotGateExample(props) {
   return (
     <>
       <div className="span--6">
-        <h3>NOT Gate</h3>
-        <p>The NOT gate.</p>
+        <canvas width="400px" height="300px" ref={canvasRef} />
       </div>
       <div className="span--6">
-        <canvas width="400px" height="300px" ref={canvasRef} />
+        <h3>And Gate</h3>
+        <p>The simple AND gate.</p>
       </div>
     </>
   );
@@ -63,9 +63,9 @@ function onDraw(ctx) {
 }
 
 // Main Logic
-nodes.push(new SwitchNode(50, 150));
-nodes.push(new NotGate(200, 150, nodes[0]));
+nodes.push(new SwitchNode(50, 100));
+nodes.push(new SwitchNode(50, 200));
+nodes.push(new AndGate(200, 150, nodes[0], nodes[1]));
 nodes.push(new Node(350, 150));
 
-nodes[1].AddConnection(nodes[2]);
-nodes[1].OnSignal(false);
+nodes[2].AddConnection(nodes[3]);

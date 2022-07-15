@@ -1,13 +1,20 @@
 import React from "react";
 
-import KCanvas from "../../canvas/KCanvas.js";
+import KCanvas from "../../../canvas/KCanvas.js";
 
-import { Node, SwitchNode, NotGate, XorGate, XnorGate } from "./Nodes.js";
+import {
+  Node,
+  SwitchNode,
+  AndGate,
+  NandGate,
+  OrGate,
+  XorGate,
+} from "../Nodes.js";
 
 let nodes = [];
 let selected;
 
-export default function XnorGateExample(props) {
+export default function XorGateExample(props) {
   // Canvas
   const canvasRef = React.useRef(null);
 
@@ -24,13 +31,11 @@ export default function XnorGateExample(props) {
   return (
     <>
       <div className="span--6">
-        <canvas width="400px" height="300px" ref={canvasRef} />
+        <h3>XOR Gate</h3>
+        <p>The XOR gate is a little tricker.</p>
       </div>
       <div className="span--6">
-        <h3>XNOR Gate</h3>
-        <p>
-          We also have the XNOR gate. It is just the opposite of the XOR gate.
-        </p>
+        <canvas width="400px" height="300px" ref={canvasRef} />
       </div>
     </>
   );
@@ -67,19 +72,19 @@ function onDraw(ctx) {
 // Main Logic
 nodes.push(new SwitchNode(50, 40));
 nodes.push(new SwitchNode(50, 110));
-nodes.push(new XorGate(150, 75, nodes[0], nodes[1]));
-nodes.push(new NotGate(250, 75, nodes[2]));
+nodes.push(new OrGate(150, 40, nodes[0], nodes[1]));
+nodes.push(new NandGate(150, 110, nodes[0], nodes[1]));
+nodes.push(new AndGate(250, 75, nodes[2], nodes[3]));
 nodes.push(new Node(350, 75));
 
-nodes[3].AddConnection(nodes[4]);
+nodes[4].AddConnection(nodes[5]);
 nodes[0].OnSignal(false);
 nodes[1].OnSignal(false);
 
 nodes.push(new SwitchNode(50, 190));
 nodes.push(new SwitchNode(50, 260));
-nodes.push(new XnorGate(200, 225, nodes[5], nodes[6]));
+nodes.push(new XorGate(200, 225, nodes[6], nodes[7]));
 nodes.push(new Node(350, 225));
 
-nodes[7].AddConnection(nodes[8]);
-nodes[5].OnSignal(false);
+nodes[8].AddConnection(nodes[9]);
 nodes[6].OnSignal(false);

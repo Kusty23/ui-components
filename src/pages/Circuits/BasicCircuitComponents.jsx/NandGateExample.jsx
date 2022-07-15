@@ -1,8 +1,8 @@
 import React from "react";
 
-import KCanvas from "../../canvas/KCanvas.js";
+import KCanvas from "../../../canvas/KCanvas.js";
 
-import { Node, SwitchNode, AndGate, NotGate, NandGate } from "./Nodes.js";
+import { Node, SwitchNode, AndGate, NotGate, NandGate } from "../Nodes.js";
 
 let nodes = [];
 let selected;
