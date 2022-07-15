@@ -255,3 +255,22 @@ export class NorGate extends GateNode {
     }
   }
 }
+
+export class XorGate extends GateNode {
+  constructor(x, y, node1, node2) {
+    super(x, y, "XOR");
+
+    this.node1 = node1;
+    this.node1.AddConnection(this);
+    this.node2 = node2;
+    this.node2.AddConnection(this);
+  }
+
+  OnSignal(signal) {
+    if (this.node1.active != this.node2.active) {
+      this.Activate();
+    } else {
+      this.Deactivate();
+    }
+  }
+}

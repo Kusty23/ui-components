@@ -5,6 +5,7 @@ import NandGateExample from "./NandGateExample";
 import NorGateExample from "./NorGateExample";
 import NotGateExample from "./NotGateExample";
 import OrGateExample from "./OrGateExample";
+import XorGateExample from "./XorGateExample";
 
 export default function CircuitSimulation(props) {
   return (
@@ -15,6 +16,7 @@ export default function CircuitSimulation(props) {
       <NandGateExample />
       <OrGateExample />
       <NorGateExample />
+      <XorGateExample />
     </div>
   );
 }
