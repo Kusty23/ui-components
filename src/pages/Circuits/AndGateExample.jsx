@@ -45,7 +45,7 @@ function onMouseDown(x, y) {
 }
 
 function onMouseMove(x, y, dx, dy) {
-  if (selected) {
+  if (selected && selected.canMove) {
     selected.pos.x += dx;
     selected.pos.y += dy;
   }

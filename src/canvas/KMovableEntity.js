@@ -4,7 +4,9 @@ export default class KMovableEntity {
 
     this.size = { width: width, height: height };
     this.color = "rgb(0, 255, 255)";
+
     this.active = false;
+    this.canMove = true;
   }
 
   ContainsPointRect(x, y) {
