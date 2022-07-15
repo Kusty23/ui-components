@@ -6,7 +6,6 @@ import {
   Node,
   SwitchNode,
   AndGate,
-  NotGate,
   NandGate,
   OrGate,
   XorGate,
