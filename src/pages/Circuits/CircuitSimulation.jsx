@@ -3,6 +3,7 @@ import React from "react";
 import AndGateExample from "./AndGateExample";
 import NandGateExample from "./NandGateExample";
 import NotGateExample from "./NotGateExample";
+import OrGateExample from "./OrGateExample";
 
 export default function CircuitSimulation(props) {
   return (
@@ -11,6 +12,7 @@ export default function CircuitSimulation(props) {
       <AndGateExample />
       <NotGateExample />
       <NandGateExample />
+      <OrGateExample />
     </div>
   );
 }

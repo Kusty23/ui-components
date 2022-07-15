@@ -182,9 +182,9 @@ export class AndGate extends GateNode {
   }
 }
 
-export class OrGate extends Node {
+export class OrGate extends GateNode {
   constructor(x, y, node1, node2) {
-    super(x, y);
+    super(x, y, "OR");
 
     this.node1 = node1;
     this.node1.AddConnection(this);
