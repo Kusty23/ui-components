@@ -115,6 +115,8 @@ export class AndGate extends Node {
   constructor(x, y, node1, node2) {
     super(x, y);
 
+    this.color = PackRGB(255, 255, 0);
+
     this.node1 = node1;
     this.node1.AddConnection(this);
     this.node2 = node2;
@@ -142,6 +144,25 @@ export class OrGate extends Node {
 
   OnSignal(signal) {
     if (this.node1.active || this.node2.active) {
+      this.Activate();
+    } else {
+      this.Deactivate();
+    }
+  }
+}
+
+export class NotGate extends Node {
+  constructor(x, y, node) {
+    super(x, y);
+
+    this.color = PackRGB(0, 0, 255);
+
+    this.node = node;
+    this.node.AddConnection(this);
+  }
+
+  OnSignal(signal) {
+    if (!this.node.active) {
       this.Activate();
     } else {
       this.Deactivate();
