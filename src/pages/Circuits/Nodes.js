@@ -1,70 +1,7 @@
-import React from "react";
+import KMovableEntity from "../../canvas/KMovableEntity.js";
+import { PackRGB } from "../../canvas/KCanvasHelpers.js";
 
-import KSiteContainer from "../components/KSiteContainer";
-import KCanvas from "../canvas/KCanvas.js";
-import KMovableEntity from "../canvas/KMovableEntity.js";
-import { PackRGB } from "../canvas/KCanvasHelpers.js";
-
-let nodes = [];
-let selected;
-
-export default function CircuitSimulation(props) {
-  // Canvas
-  const canvasRef = React.useRef(null);
-
-  // Waits until DOM elements are loaded
-  React.useEffect(() => {
-    let canvas = new KCanvas(canvasRef);
-    canvas.AddMouseDown(onMouseDown);
-    canvas.AddMouseMove(onMouseMove);
-    canvas.AddMouseUp(onMouseUp);
-
-    canvas.AddDraw(onDraw);
-  });
-
-  return (
-    <KSiteContainer
-      siteName="Circuit Simulation"
-      content={
-        <>
-          <canvas width="700px" height="600px" ref={canvasRef} />
-        </>
-      }
-    ></KSiteContainer>
-  );
-}
-
-function onMouseDown(x, y) {
-  nodes.forEach((node) => {
-    if (node.ContainsPointEllipse(x, y)) {
-      selected = node;
-      node.OnClick();
-    }
-  });
-}
-
-function onMouseMove(x, y, dx, dy) {
-  if (selected) {
-    selected.pos.x += dx;
-    selected.pos.y += dy;
-  }
-}
-
-function onMouseUp(x, y) {
-  if (selected) {
-    //selected.Deactivate();
-    selected = null;
-  }
-}
-
-function onDraw(ctx) {
-  //console.log(ctx);
-  for (let i = 0; i < nodes.length; i++) {
-    nodes[i].Render(ctx);
-  }
-}
-
-class Node extends KMovableEntity {
+export class Node extends KMovableEntity {
   constructor(x, y) {
     super(x, y, 20, 20);
 
@@ -110,7 +47,6 @@ class Node extends KMovableEntity {
     }
 
     ctx.fillStyle = this.active ? "rgb(255,255,255)" : this.color;
-    //ctx.fillRect(this.pos.x, this.pos.y, this.size.width, this.size.height);
     ctx.beginPath();
     ctx.ellipse(
       this.pos.x,
@@ -130,7 +66,7 @@ class Node extends KMovableEntity {
   }
 }
 
-class ClockNode extends Node {
+export class ClockNode extends Node {
   constructor(x, y, delay) {
     super(x, y);
 
@@ -159,7 +95,7 @@ class ClockNode extends Node {
   }
 }
 
-class SwitchNode extends Node {
+export class SwitchNode extends Node {
   constructor(x, y) {
     super(x, y);
     this.color = PackRGB(255, 0, 0);
@@ -174,7 +110,7 @@ class SwitchNode extends Node {
   }
 }
 
-class AndGate extends Node {
+export class AndGate extends Node {
   constructor(x, y, node1, node2) {
     super(x, y);
 
@@ -193,7 +129,7 @@ class AndGate extends Node {
   }
 }
 
-class OrGate extends Node {
+export class OrGate extends Node {
   constructor(x, y, node1, node2) {
     super(x, y);
 
@@ -211,11 +147,3 @@ class OrGate extends Node {
     }
   }
 }
-
-// Main Logic
-nodes.push(new SwitchNode(200, 300));
-nodes.push(new SwitchNode(200, 200));
-nodes.push(new Node(400, 250));
-nodes.push(new AndGate(300, 250, nodes[0], nodes[1]));
-
-nodes[3].AddConnection(nodes[2]);
