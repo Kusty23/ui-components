@@ -78,7 +78,9 @@ export class Node extends KMovableEntity {
       ctx.stroke();
 
       ctx.lineWidth = 6;
-      ctx.strokeStyle = this.active ? PackRGB(255, 255, 255) : PackRGB(0, 0, 0);
+      ctx.strokeStyle = this.active
+        ? PackRGB(255, 255, 255)
+        : PackRGB(40, 40, 40);
       ctx.stroke();
 
       ctx.closePath();
