@@ -3,7 +3,7 @@ import { PackRGB } from "../../canvas/KCanvasHelpers.js";
 
 export class Node extends KMovableEntity {
   constructor(x, y) {
-    super(x, y, 20, 20);
+    super(x, y, 25, 25);
 
     this.connections = [];
   }
