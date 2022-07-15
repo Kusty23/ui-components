@@ -10,6 +10,8 @@ export class Node extends KMovableEntity {
 
     this.color = PackRGB(123, 123, 235);
     this.highlightColor = PackRGB(163, 163, 255);
+
+    this.wireColor = PackRGB(80, 150, 80);
   }
 
   OnClick() {
@@ -41,18 +43,7 @@ export class Node extends KMovableEntity {
   }
 
   Render(ctx) {
-    for (let i = 0; i < this.connections.length; i++) {
-      let other = this.connections[i];
-
-      ctx.lineWidth = 10;
-      ctx.strokeStyle = this.active ? PackRGB(255, 255, 255) : PackRGB(0, 0, 0);
-
-      ctx.beginPath();
-      ctx.moveTo(this.pos.x, this.pos.y);
-      ctx.lineTo(other.pos.x, other.pos.y);
-      ctx.stroke();
-      ctx.closePath();
-    }
+    this.DrawConnections(ctx);
 
     ctx.fillStyle = this.active ? this.highlightColor : this.color;
     ctx.strokeStyle = this.active ? this.color : PackRGB(0, 0, 0);
@@ -72,6 +63,26 @@ export class Node extends KMovableEntity {
     ctx.closePath();
 
     this.DrawLabel(ctx);
+  }
+
+  DrawConnections(ctx) {
+    for (let i = 0; i < this.connections.length; i++) {
+      let other = this.connections[i];
+
+      ctx.beginPath();
+      ctx.lineWidth = 14;
+      ctx.strokeStyle = this.wireColor;
+
+      ctx.moveTo(this.pos.x, this.pos.y);
+      ctx.lineTo(other.pos.x, other.pos.y);
+      ctx.stroke();
+
+      ctx.lineWidth = 6;
+      ctx.strokeStyle = this.active ? PackRGB(255, 255, 255) : PackRGB(0, 0, 0);
+      ctx.stroke();
+
+      ctx.closePath();
+    }
   }
 
   DrawLabel(ctx) {
@@ -137,13 +148,23 @@ export class SwitchNode extends Node {
 }
 
 class GateNode extends Node {
-  constructor(x, y, label) {
+  constructor(x, y, label, node1, node2) {
     super(x, y);
 
     this.label = label;
 
     this.color = PackRGB(220, 220, 20);
     this.highlightColor = PackRGB(255, 255, 160);
+
+    this.node1 = node1;
+    this.node1.AddConnection(this);
+
+    this.node2 = node2;
+
+    if (this.node2) {
+      node2.wireColor = PackRGB(80, 80, 150);
+      this.node2.AddConnection(this);
+    }
   }
 
   DrawLabel(ctx) {
@@ -157,12 +178,7 @@ class GateNode extends Node {
 
 export class AndGate extends GateNode {
   constructor(x, y, node1, node2) {
-    super(x, y, "AND");
-
-    this.node1 = node1;
-    this.node1.AddConnection(this);
-    this.node2 = node2;
-    this.node2.AddConnection(this);
+    super(x, y, "AND", node1, node2);
   }
 
   DrawLabel(ctx) {
@@ -184,12 +200,7 @@ export class AndGate extends GateNode {
 
 export class OrGate extends GateNode {
   constructor(x, y, node1, node2) {
-    super(x, y, "OR");
-
-    this.node1 = node1;
-    this.node1.AddConnection(this);
-    this.node2 = node2;
-    this.node2.AddConnection(this);
+    super(x, y, "OR", node1, node2);
   }
 
   OnSignal(signal) {
@@ -202,15 +213,12 @@ export class OrGate extends GateNode {
 }
 
 export class NotGate extends GateNode {
-  constructor(x, y, node) {
-    super(x, y, "NOT");
-
-    this.node = node;
-    this.node.AddConnection(this);
+  constructor(x, y, node1) {
+    super(x, y, "NOT", node1);
   }
 
   OnSignal(signal) {
-    if (!this.node.active) {
+    if (!this.node1.active) {
       this.Activate();
     } else {
       this.Deactivate();
@@ -220,12 +228,7 @@ export class NotGate extends GateNode {
 
 export class NandGate extends GateNode {
   constructor(x, y, node1, node2) {
-    super(x, y, "NAND");
-
-    this.node1 = node1;
-    this.node1.AddConnection(this);
-    this.node2 = node2;
-    this.node2.AddConnection(this);
+    super(x, y, "NAND", node1, node2);
   }
 
   OnSignal(signal) {
@@ -239,12 +242,7 @@ export class NandGate extends GateNode {
 
 export class NorGate extends GateNode {
   constructor(x, y, node1, node2) {
-    super(x, y, "NOR");
-
-    this.node1 = node1;
-    this.node1.AddConnection(this);
-    this.node2 = node2;
-    this.node2.AddConnection(this);
+    super(x, y, "NOR", node1, node2);
   }
 
   OnSignal(signal) {
@@ -258,12 +256,7 @@ export class NorGate extends GateNode {
 
 export class XorGate extends GateNode {
   constructor(x, y, node1, node2) {
-    super(x, y, "XOR");
-
-    this.node1 = node1;
-    this.node1.AddConnection(this);
-    this.node2 = node2;
-    this.node2.AddConnection(this);
+    super(x, y, "XOR", node1, node2);
   }
 
   OnSignal(signal) {
@@ -277,12 +270,7 @@ export class XorGate extends GateNode {
 
 export class XnorGate extends GateNode {
   constructor(x, y, node1, node2) {
-    super(x, y, "XNOR");
-
-    this.node1 = node1;
-    this.node1.AddConnection(this);
-    this.node2 = node2;
-    this.node2.AddConnection(this);
+    super(x, y, "XNOR", node1, node2);
   }
 
   OnSignal(signal) {
