@@ -90,6 +90,25 @@ export class Node extends KMovableEntity {
   }
 }
 
+class GateNode extends Node {
+  constructor(x, y, label) {
+    super(x, y);
+
+    this.label = label;
+
+    this.color = PackRGB(220, 220, 20);
+    this.highlightColor = PackRGB(255, 255, 160);
+  }
+
+  DrawLabel(ctx) {
+    ctx.font = "20px  Arial";
+    ctx.fillStyle = "black";
+    ctx.textAlign = "center";
+
+    ctx.fillText(this.label, this.pos.x, this.pos.y + 8);
+  }
+}
+
 export class ClockNode extends Node {
   constructor(x, y, delay) {
     super(x, y);
@@ -163,25 +182,6 @@ export class AndGate extends GateNode {
   }
 }
 
-class GateNode extends Node {
-  constructor(x, y, label) {
-    super(x, y);
-
-    this.label = label;
-
-    this.color = PackRGB(220, 220, 20);
-    this.highlightColor = PackRGB(255, 255, 160);
-  }
-
-  DrawLabel(ctx) {
-    ctx.font = "20px  Arial";
-    ctx.fillStyle = "black";
-    ctx.textAlign = "center";
-
-    ctx.fillText(this.label, this.pos.x, this.pos.y + 8);
-  }
-}
-
 export class OrGate extends Node {
   constructor(x, y, node1, node2) {
     super(x, y);
@@ -211,6 +211,25 @@ export class NotGate extends GateNode {
 
   OnSignal(signal) {
     if (!this.node.active) {
+      this.Activate();
+    } else {
+      this.Deactivate();
+    }
+  }
+}
+
+export class NandGate extends GateNode {
+  constructor(x, y, node1, node2) {
+    super(x, y, "NAND");
+
+    this.node1 = node1;
+    this.node1.AddConnection(this);
+    this.node2 = node2;
+    this.node2.AddConnection(this);
+  }
+
+  OnSignal(signal) {
+    if (!(this.node1.active && this.node2.active)) {
       this.Activate();
     } else {
       this.Deactivate();

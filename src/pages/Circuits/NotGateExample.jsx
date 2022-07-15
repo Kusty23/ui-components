@@ -1,6 +1,5 @@
 import React from "react";
 
-import KSiteContainer from "../../components/KSiteContainer";
 import KCanvas from "../../canvas/KCanvas.js";
 
 import { Node, SwitchNode, NotGate } from "./Nodes.js";
