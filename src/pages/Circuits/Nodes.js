@@ -248,7 +248,7 @@ export class NorGate extends GateNode {
   }
 
   OnSignal(signal) {
-    if (!(this.node1.active && this.node2.active)) {
+    if (!(this.node1.active || this.node2.active)) {
       this.Activate();
     } else {
       this.Deactivate();
