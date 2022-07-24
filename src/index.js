@@ -1,6 +1,12 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  HashRouter,
+} from "react-router-dom";
 import "./import.js";
 
 import KTopMenu from "./components/KTopMenu";
@@ -19,26 +25,26 @@ import CircuitSimulation from "./pages/Circuits/BasicCircuitComponents.jsx/Circu
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-  <BrowserRouter>
+  <HashRouter>
     <div className="app">
       <KTopMenu
         index="0"
         content={[
-          { text: "Guideline", href: "./guideline" },
+          { text: "Guideline", href: "#/guideline" },
           {
             isGroup: true,
             text: "UI Components",
             content: [
-              { text: "Nav Menus", href: "./navmenus" },
-              { text: "Scrollbars", href: "./scrollbars" },
-              { text: "Carousels", href: "./carousels" },
-              { text: "Buttons", href: "./buttons" },
-              { text: "Grid System", href: "./grid" },
+              { text: "Nav Menus", href: "#/navmenus" },
+              { text: "Scrollbars", href: "#/scrollbars" },
+              { text: "Carousels", href: "#/carousels" },
+              { text: "Buttons", href: "#/buttons" },
+              { text: "Grid System", href: "#/grid" },
             ],
           },
-          { text: "Blobs", href: "./blobs" },
-          { text: "I Love Hue", href: "./i-love-hue" },
-          { text: "Circuit Simulation", href: "./circuit" },
+          //{ text: "Blobs", href: "#/blobs" },
+          { text: "I Love Hue", href: "#/i-love-hue" },
+          { text: "Circuit Simulation", href: "#/circuit" },
         ]}
       />
       <Routes>
@@ -54,5 +60,5 @@ root.render(
         <Route path="/circuit" element={<CircuitSimulation />} />
       </Routes>
     </div>
-  </BrowserRouter>
+  </HashRouter>
 );

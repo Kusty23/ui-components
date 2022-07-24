@@ -36,7 +36,9 @@ export default function KTopMenu(props) {
 
   return (
     <div className={classStyle}>
-      <KLogo />
+      <a href="/">
+        <KLogo />
+      </a>
 
       <div>{links}</div>
     </div>
